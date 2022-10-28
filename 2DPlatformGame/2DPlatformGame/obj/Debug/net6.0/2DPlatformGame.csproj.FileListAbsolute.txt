@@ -23,3 +23,12 @@
 /Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/obj/Debug/net6.0/2DPlatformGame.pdb
 /Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/obj/Debug/net6.0/2DPlatformGame.genruntimeconfig.cache
 /Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/obj/Debug/net6.0/ref/2DPlatformGame.dll
+/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/samurai/death.xnb
+/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/samurai/heavy-attack.xnb
+/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/samurai/idle.xnb
+/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/samurai/jump.xnb
+/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/samurai/light-attack.xnb
+/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/samurai/roll.xnb
+/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/samurai/run-sword.xnb
+/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/samurai/run.xnb
+/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/samurai/take-dmg.xnb
