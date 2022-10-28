@@ -9,10 +9,14 @@ namespace DPlatformGame.Animations
         public AnimationFrame CurrentFrame { get; set; }
         private List<AnimationFrame> frames;
         private int counter;
+        private double secondCounter;
+        private int fps = 4;
 
         public Animation()
         {
             frames = new List<AnimationFrame>();
+            counter = 0;
+            secondCounter = 0;
         }
 
         public void AddFrame(AnimationFrame frame)
@@ -21,10 +25,18 @@ namespace DPlatformGame.Animations
             this.CurrentFrame = this.frames[0];
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             CurrentFrame = frames[counter];
-            counter++;
+
+            secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
+
+            if(secondCounter >= 1d / fps)
+            {
+                counter++;
+                secondCounter = 0;
+            }
+
             if(counter >= frames.Count)
             {
                 counter = 0;

@@ -9,7 +9,6 @@ namespace DPlatformGame.Characters
     public class Samurai : IGameObject
     {
         private Texture2D texture;
-        private int move_X = 0;
         Animation animation;
 
         public Samurai(Texture2D texture)
@@ -24,9 +23,9 @@ namespace DPlatformGame.Characters
             spriteBatch.Draw(texture, new Vector2(0, 0), animation.CurrentFrame.SourceRectangle, Color.White, 0, new Vector2(0, 0), 4.0f, SpriteEffects.None, 0);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
-            animation.Update();
+            animation.Update(gameTime);
         }
     }
 }
