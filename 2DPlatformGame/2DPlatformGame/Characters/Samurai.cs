@@ -19,6 +19,9 @@ namespace DPlatformGame.Characters
         Animation moveAnimation;
         SpriteEffects effect;
 
+        Rectangle currentFrame;
+        Texture2D currentTexture;
+
         public Samurai(Texture2D idleTexture, Texture2D moveTexture)
         {
             //create spriteeffect
@@ -43,7 +46,7 @@ namespace DPlatformGame.Characters
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(this.moveTexture, this.position, this.moveAnimation.CurrentFrame.SourceRectangle, Color.White, 0, new Vector2(0, 0), 4.0f, effect, 0);
+            spriteBatch.Draw(this.currentTexture, this.position, this.currentFrame, Color.White, 0, new Vector2(0, 0), scale, effect, 0); //this.moveAnimation.CurrentFrame.SourceRectangle
         }
 
         public void Update(GameTime gameTime)
@@ -55,7 +58,19 @@ namespace DPlatformGame.Characters
             direction *= speed;
             position += direction;
 
-            moveAnimation.Update(gameTime);
+            //Animation decider
+            if(direction.X == 0)
+            {
+                idleAnimation.Update(gameTime);
+                currentTexture = idleTexture;
+                currentFrame = idleAnimation.CurrentFrame.SourceRectangle;
+            }
+            else
+            {
+                moveAnimation.Update(gameTime);
+                currentTexture = moveTexture;
+                currentFrame = moveAnimation.CurrentFrame.SourceRectangle;
+            }
         }
 
         private void CheckForFlip(Vector2 direction)
