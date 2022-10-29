@@ -3,6 +3,8 @@ using DPlatformGame.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using DPlatformGame.Animations;
+using Microsoft.Xna.Framework.Input;
+using DPlatformGame.Input;
 
 namespace DPlatformGame.Characters
 {
@@ -46,10 +48,27 @@ namespace DPlatformGame.Characters
 
         public void Update(GameTime gameTime)
         {
+            //input handling
+            KeyboardReader k = new KeyboardReader();
+            var direction = k.ReadInput();
+            CheckForFlip(direction);
+            direction *= speed;
+            position += direction;
+
             moveAnimation.Update(gameTime);
-            Move();
         }
 
+        private void CheckForFlip(Vector2 direction)
+        {
+            if(direction.X > 0)
+            {
+                effect = SpriteEffects.None;
+            }
+            else if (direction.X < 0)
+            {
+                effect = SpriteEffects.FlipHorizontally;
+            }
+        }
 
         private void Move()
         {
@@ -57,25 +76,12 @@ namespace DPlatformGame.Characters
             if (position.X > 1280 - ((moveTexture.Width/12)*scale)
                 || position.X < 0)
             {
-                CheckForFlip();
                 speed.X *= -1;
             }
             if (position.Y > 720 - ((moveTexture.Height*1)*scale)
                 || position.Y < 0)
             {
                 speed.Y *= -1;
-            }
-        }
-
-        private void CheckForFlip()
-        {
-            if (effect == SpriteEffects.None)
-            {
-                effect = SpriteEffects.FlipHorizontally;
-            }
-            else
-            {
-                effect = SpriteEffects.None;
             }
         }
     }

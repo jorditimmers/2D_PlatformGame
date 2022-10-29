@@ -47,7 +47,7 @@ public class Game1 : Game
             Exit();
 
         //Update characters
-        samurai.Update(gameTime);
+        samurai.Update(gameTime);     
 
         base.Update(gameTime);
     }
