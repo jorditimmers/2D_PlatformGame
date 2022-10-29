@@ -1,17 +1,16 @@
 ﻿<Properties StartupConfiguration="{3B8BAD41-67B7-442E-ACB2-9ED003ED2557}|Default">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="2DPlatformGame/Game1.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="2DPlatformGame/Animations/Animation.cs">
     <Files>
-      <File FileName="2DPlatformGame/Game1.cs" Line="45" Column="44" />
+      <File FileName="2DPlatformGame/Game1.cs" Line="48" Column="32" />
+      <File FileName="2DPlatformGame/Animations/Animation.cs" Line="5" Column="35" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="2DPlatformGame" expanded="True">
-            <Node name="2DPlatformGame" expanded="True" />
+            <Node name="2DPlatformGame" expanded="True">
+              <Node name="Animations" expanded="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
@@ -20,7 +19,11 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.2DPlatformGame PreferredExecutionTarget="MonoDevelop.Default" />
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
 </Properties>

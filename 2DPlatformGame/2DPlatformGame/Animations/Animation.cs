@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace DPlatformGame.Animations
 {
@@ -10,7 +11,7 @@ namespace DPlatformGame.Animations
         private List<AnimationFrame> frames;
         private int counter;
         private double secondCounter;
-        private int fps = 4;
+        private int fps = 15;
 
         public Animation()
         {

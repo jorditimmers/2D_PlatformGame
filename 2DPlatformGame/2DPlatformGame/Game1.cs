@@ -10,7 +10,8 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
-    Texture2D _SamuraiTexture;
+    Texture2D _SamuraiIdleTexture;
+    Texture2D _SamuraiMoveTexture;
 
     Samurai samurai;
 
@@ -28,7 +29,7 @@ public class Game1 : Game
     {
         base.Initialize(); //Put logic AFTER this
 
-        samurai = new Samurai(_SamuraiTexture);
+        samurai = new Samurai(_SamuraiIdleTexture, _SamuraiMoveTexture);
     }
 
     protected override void LoadContent()
@@ -36,7 +37,8 @@ public class Game1 : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         //Load sprites
-        _SamuraiTexture = Content.Load<Texture2D>("samurai/idle");
+        _SamuraiIdleTexture = Content.Load<Texture2D>("samurai/idle");
+        _SamuraiMoveTexture = Content.Load<Texture2D>("samurai/run");
     }
 
     protected override void Update(GameTime gameTime)
