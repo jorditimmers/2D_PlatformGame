@@ -20,6 +20,10 @@ namespace DPlatformGame.Input
             {
                 direction.X += 1;
             }
+            if (state.IsKeyDown(Keys.Space))
+            {
+                //TODO
+            }
             return direction;
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DPlatformGame.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static System.Collections.Specialized.BitVector32;
 using static System.Formats.Asn1.AsnWriter;
 
 namespace DPlatformGame.Animations
@@ -19,15 +20,19 @@ namespace DPlatformGame.Animations
         private Texture2D currentTexture;
         private float scale = 3.0f;
 
+        private readonly Vector2 gravity = new Vector2(0, .5f);
+        private readonly Vector2 jumpingForce = new Vector2(0, 10f);
+
         public AnimationPool()
         {
             effect = SpriteEffects.None;
             position = new Vector2(0, 0);
-            speed = new Vector2(5, 5);
+            speed = new Vector2(5, 0);
         }
 
         public void AddAnimation(Animation a, Texture2D t)
         {
+            currentTexture = t; //giving currenttexture a value so it is not null when we use it to check the height of texture
             this.AnimationList.Add(a);
             this.Texturelist.Add(t);
         }
@@ -36,6 +41,17 @@ namespace DPlatformGame.Animations
         {
             KeyboardReader k = new KeyboardReader();
             var direction = k.ReadInput();
+            if (position.Y >= 720 - 64 - (currentTexture.Height * scale)+6)
+            {
+                position.Y = 720 - 64 - (currentTexture.Height * scale)+6;
+                direction.Y = 0;
+                speed.Y = 0;
+            }
+            else
+            {
+                direction.Y = 1;
+                speed += gravity;
+            }
             direction *= speed;
             position += direction;
 
@@ -54,8 +70,6 @@ namespace DPlatformGame.Animations
                 currentTexture = Texturelist[1];
                 currentFrame = AnimationList[1].CurrentFrame.SourceRectangle;
             }
-
-            position.Y = 720 - 64 - (currentTexture.Height * scale) + 6;
         }
 
         public void Draw(SpriteBatch spriteBatch)
