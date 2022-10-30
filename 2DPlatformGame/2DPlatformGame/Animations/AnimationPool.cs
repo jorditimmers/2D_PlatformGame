@@ -21,7 +21,7 @@ namespace DPlatformGame.Animations
         private float scale = 3.0f;
 
         private readonly Vector2 gravity = new Vector2(0, .5f);
-        private readonly Vector2 jumpingForce = new Vector2(0, 10f);
+
 
         public AnimationPool()
         {
