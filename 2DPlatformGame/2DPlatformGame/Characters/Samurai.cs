@@ -10,7 +10,7 @@ namespace DPlatformGame.Characters
 {
     public class Samurai : IGameObject
     {
-        AnimationPool pool;
+        public AnimationPool pool;
 
         public Samurai(Texture2D idleTexture, Texture2D moveTexture)
         {

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace _2DPlatformGame;
 
@@ -12,7 +13,10 @@ public class Game1 : Game
 
     Texture2D _SamuraiIdleTexture;
     Texture2D _SamuraiMoveTexture;
-    Texture2D _LevelBackground;
+    Texture2D _LevelBackgroundTexture;
+
+    Texture2D _FloorTexture;
+    Rectangle _FloorRect;
 
     Samurai samurai;
 
@@ -30,6 +34,8 @@ public class Game1 : Game
     {
         base.Initialize(); //Put logic AFTER this
 
+        _FloorRect = new Rectangle(0, 720-64 ,1280,64);
+
         samurai = new Samurai(_SamuraiIdleTexture, _SamuraiMoveTexture);
     }
 
@@ -37,10 +43,14 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+        //Loading and creating floor texture
+        _FloorTexture = new Texture2D(GraphicsDevice, 1, 1);
+        _FloorTexture.SetData(new[] { Color.White });
+
         //Load sprites
         _SamuraiIdleTexture = Content.Load<Texture2D>("samurai/idle");
         _SamuraiMoveTexture = Content.Load<Texture2D>("samurai/run");
-        _LevelBackground = Content.Load<Texture2D>("Background");
+        _LevelBackgroundTexture = Content.Load<Texture2D>("Background");
     }
 
     protected override void Update(GameTime gameTime)
@@ -60,8 +70,9 @@ public class Game1 : Game
 
         //Draw Characters
         _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
-        _spriteBatch.Draw(_LevelBackground, new Rectangle(0,0,1280,720), Color.White);
-        samurai.Draw(_spriteBatch);
+        _spriteBatch.Draw(_LevelBackgroundTexture, new Rectangle(0,0,1280,720), Color.White); //Background
+        //_spriteBatch.Draw(_FloorTexture, _FloorRect, Color.Aqua); //Floor
+        samurai.Draw(_spriteBatch); //Samurai
         _spriteBatch.End();
 
         base.Draw(gameTime);

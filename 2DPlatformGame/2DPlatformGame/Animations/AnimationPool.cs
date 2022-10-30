@@ -23,7 +23,7 @@ namespace DPlatformGame.Animations
         {
             effect = SpriteEffects.None;
             position = new Vector2(0, 0);
-            speed = new Vector2(5, 0);
+            speed = new Vector2(5, 5);
         }
 
         public void AddAnimation(Animation a, Texture2D t)
@@ -54,6 +54,8 @@ namespace DPlatformGame.Animations
                 currentTexture = Texturelist[1];
                 currentFrame = AnimationList[1].CurrentFrame.SourceRectangle;
             }
+
+            position.Y = 720 - 64 - (currentTexture.Height * scale) + 6;
         }
 
         public void Draw(SpriteBatch spriteBatch)
