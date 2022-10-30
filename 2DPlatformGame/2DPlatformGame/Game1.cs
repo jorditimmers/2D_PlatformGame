@@ -12,6 +12,7 @@ public class Game1 : Game
 
     Texture2D _SamuraiIdleTexture;
     Texture2D _SamuraiMoveTexture;
+    Texture2D _LevelBackground;
 
     Samurai samurai;
 
@@ -39,6 +40,7 @@ public class Game1 : Game
         //Load sprites
         _SamuraiIdleTexture = Content.Load<Texture2D>("samurai/idle");
         _SamuraiMoveTexture = Content.Load<Texture2D>("samurai/run");
+        _LevelBackground = Content.Load<Texture2D>("Background");
     }
 
     protected override void Update(GameTime gameTime)
@@ -58,6 +60,7 @@ public class Game1 : Game
 
         //Draw Characters
         _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
+        _spriteBatch.Draw(_LevelBackground, new Rectangle(0,0,1280,720), Color.White);
         samurai.Draw(_spriteBatch);
         _spriteBatch.End();
 

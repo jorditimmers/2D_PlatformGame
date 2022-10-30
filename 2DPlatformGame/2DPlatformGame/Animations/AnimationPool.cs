@@ -17,7 +17,7 @@ namespace DPlatformGame.Animations
         private Vector2 speed;
         private Rectangle currentFrame;
         private Texture2D currentTexture;
-        private float scale = 4.0f;
+        private float scale = 3.0f;
 
         public AnimationPool()
         {

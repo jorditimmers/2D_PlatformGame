@@ -32,3 +32,4 @@
 /Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/samurai/run-sword.xnb
 /Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/samurai/run.xnb
 /Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/samurai/take-dmg.xnb
+/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/Background.xnb
