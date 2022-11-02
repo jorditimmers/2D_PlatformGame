@@ -22,7 +22,7 @@ namespace DPlatformGame.Input
             }
             if (state.IsKeyDown(Keys.Space))
             {
-                //TODO
+                direction.Y -= 2;
             }
             return direction;
         }

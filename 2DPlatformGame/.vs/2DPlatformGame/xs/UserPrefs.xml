@@ -1,16 +1,15 @@
 ﻿<Properties StartupConfiguration="{3B8BAD41-67B7-442E-ACB2-9ED003ED2557}|Default">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.2DPlatformGame PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.2DPlatformGame PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workbench ActiveDocument="2DPlatformGame/Animations/AnimationPool.cs">
     <Files>
-      <File FileName="2DPlatformGame/Game1.cs" Line="50" Column="34" />
-      <File FileName="2DPlatformGame/Characters/Samurai.cs" Line="33" Column="33" />
-      <File FileName="2DPlatformGame/Input/KeyboardReader.cs" Line="14" Column="46" />
-      <File FileName="2DPlatformGame/Animations/AnimationPool.cs" Line="42" Column="35" />
+      <File FileName="2DPlatformGame/Game1.cs" Line="74" Column="11" />
+      <File FileName="2DPlatformGame/Characters/Samurai.cs" Line="13" Column="16" />
+      <File FileName="2DPlatformGame/Animations/AnimationPool.cs" Line="45" Column="14" />
+      <File FileName="2DPlatformGame/Input/KeyboardReader.cs" Line="25" Column="17" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -29,5 +28,6 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

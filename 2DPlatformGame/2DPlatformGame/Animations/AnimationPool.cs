@@ -27,7 +27,8 @@ namespace DPlatformGame.Animations
         {
             effect = SpriteEffects.None;
             position = new Vector2(0, 0);
-            speed = new Vector2(5, 0);
+            speed = new Vector2(5, 9.81f);
+
         }
 
         public void AddAnimation(Animation a, Texture2D t)
@@ -43,13 +44,13 @@ namespace DPlatformGame.Animations
             var direction = k.ReadInput();
             if (position.Y >= 720 - 64 - (currentTexture.Height * scale)+6)
             {
+                speed.Y = 9.81f;
                 position.Y = 720 - 64 - (currentTexture.Height * scale)+6;
-                direction.Y = 0;
-                speed.Y = 0;
             }
             else
             {
-                direction.Y = 1;
+                direction.Y += 1;
+                speed.Y += 0.1f;
                 speed += gravity;
             }
             direction *= speed;
