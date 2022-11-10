@@ -14,7 +14,6 @@ namespace DPlatformGame.Characters
 
         public Samurai(Texture2D idleTexture, Texture2D moveTexture)
         {
-
             //create animation pool
             pool = new AnimationPool();
             pool.AddAnimation(new Animation(), idleTexture); //idle

@@ -1,4 +1,6 @@
 ﻿using DPlatformGame.Characters;
+using DPlatformGame.Enums;
+using DPlatformGame.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -14,9 +16,16 @@ public class Game1 : Game
     Texture2D _SamuraiIdleTexture;
     Texture2D _SamuraiMoveTexture;
     Texture2D _LevelBackgroundTexture;
+    Texture2D _PlayButton;
+    Texture2D _BackButton;
+
+    GameState _GameState;
 
     Texture2D _FloorTexture;
     Rectangle _FloorRect;
+
+    Button playbutton;
+    Button backbutton;
 
     Samurai samurai;
 
@@ -37,6 +46,11 @@ public class Game1 : Game
         _FloorRect = new Rectangle(0, 720-64 ,1280,64);
 
         samurai = new Samurai(_SamuraiIdleTexture, _SamuraiMoveTexture);
+        playbutton = new Button("playbutton", _PlayButton, (_graphics.PreferredBackBufferWidth/2)-(_PlayButton.Width/2), (_graphics.PreferredBackBufferHeight / 2) - (_PlayButton.Height / 2));
+        backbutton = new Button("backbutton", _BackButton, (_graphics.PreferredBackBufferWidth / 2) - (_PlayButton.Width / 2), (_graphics.PreferredBackBufferHeight / 2) + 40);
+
+
+        _GameState = GameState.Menu;
     }
 
     protected override void LoadContent()
@@ -51,15 +65,39 @@ public class Game1 : Game
         _SamuraiIdleTexture = Content.Load<Texture2D>("samurai/idle");
         _SamuraiMoveTexture = Content.Load<Texture2D>("samurai/run");
         _LevelBackgroundTexture = Content.Load<Texture2D>("Background");
+        _PlayButton = Content.Load<Texture2D>("playbutton");
+        _BackButton = Content.Load<Texture2D>("backbutton");
+
     }
 
     protected override void Update(GameTime gameTime)
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            Exit();
+            _GameState = GameState.Menu;
 
-        //Update characters
-        samurai.Update(gameTime);     
+        if (_GameState == GameState.Menu)
+        {
+            playbutton.Update(gameTime);
+            _GameState = playbutton.GetGameState();
+            if(_GameState == GameState.Menu)
+            {
+                backbutton.Update(gameTime);
+                _GameState = backbutton.GetGameState();
+            }
+        }
+        else if (_GameState == GameState.Playing)
+        {
+            //Update characters
+            samurai.Update(gameTime);
+        }
+        else if (_GameState == GameState.Paused)
+        {
+            //TODO
+        }
+        else if (_GameState == GameState.Quiting)
+        {
+            Exit();
+        }
 
         base.Update(gameTime);
     }
@@ -68,14 +106,28 @@ public class Game1 : Game
     {
         GraphicsDevice.Clear(Color.DarkGray);
 
-        //Draw Characters
-        _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
-        _spriteBatch.Draw(_LevelBackgroundTexture, new Rectangle(0,0,1280,720), Color.White); //Background
-        //_spriteBatch.Draw(_FloorTexture, _FloorRect, Color.Aqua); //Floor
-        samurai.Draw(_spriteBatch); //Samurai
-        _spriteBatch.End();
+        if(_GameState == GameState.Menu)
+        {
+            _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
+            _spriteBatch.Draw(_LevelBackgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White); //Background
+            playbutton.Draw(_spriteBatch);
+            backbutton.Draw(_spriteBatch);
+            _spriteBatch.End();
+        }
+        else if(_GameState == GameState.Playing)
+        {
+            //Draw Characters
+            _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
+            _spriteBatch.Draw(_LevelBackgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White); //Background
+            //_spriteBatch.Draw(_FloorTexture, _FloorRect, Color.Aqua); //Floor for debugging
+            samurai.Draw(_spriteBatch); //Samurai
+            _spriteBatch.End();
+        }
+        else if(_GameState == GameState.Paused)
+        {
+            //TODO
+        }
 
         base.Draw(gameTime);
     }
 }
-
