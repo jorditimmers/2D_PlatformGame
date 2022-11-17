@@ -15,6 +15,7 @@ public class Game1 : Game
 
     Texture2D _SamuraiIdleTexture;
     Texture2D _SamuraiMoveTexture;
+    Texture2D _SamuraiJumpTexture;
     Texture2D _LevelBackgroundTexture;
     Texture2D _PlayButton;
     Texture2D _BackButton;
@@ -45,7 +46,7 @@ public class Game1 : Game
 
         _FloorRect = new Rectangle(0, 720-64 ,1280,64);
 
-        samurai = new Samurai(_SamuraiIdleTexture, _SamuraiMoveTexture);
+        samurai = new Samurai(_SamuraiIdleTexture, _SamuraiMoveTexture, _SamuraiJumpTexture);
         playbutton = new Button("playbutton", _PlayButton, (_graphics.PreferredBackBufferWidth/2)-(_PlayButton.Width/2), (_graphics.PreferredBackBufferHeight / 2) - (_PlayButton.Height / 2));
         backbutton = new Button("backbutton", _BackButton, (_graphics.PreferredBackBufferWidth / 2) - (_PlayButton.Width / 2), (_graphics.PreferredBackBufferHeight / 2) + 40);
 
@@ -64,6 +65,7 @@ public class Game1 : Game
         //Load sprites
         _SamuraiIdleTexture = Content.Load<Texture2D>("samurai/idle");
         _SamuraiMoveTexture = Content.Load<Texture2D>("samurai/run");
+        _SamuraiJumpTexture = Content.Load<Texture2D>("samurai/jump");
         _LevelBackgroundTexture = Content.Load<Texture2D>("Background");
         _PlayButton = Content.Load<Texture2D>("playbutton");
         _BackButton = Content.Load<Texture2D>("backbutton");
@@ -89,10 +91,6 @@ public class Game1 : Game
         {
             //Update characters
             samurai.Update(gameTime);
-        }
-        else if (_GameState == GameState.Paused)
-        {
-            //TODO
         }
         else if (_GameState == GameState.Quiting)
         {
@@ -122,10 +120,6 @@ public class Game1 : Game
             //_spriteBatch.Draw(_FloorTexture, _FloorRect, Color.Aqua); //Floor for debugging
             samurai.Draw(_spriteBatch); //Samurai
             _spriteBatch.End();
-        }
-        else if(_GameState == GameState.Paused)
-        {
-            //TODO
         }
 
         base.Draw(gameTime);

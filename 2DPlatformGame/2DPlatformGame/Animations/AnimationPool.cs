@@ -82,17 +82,23 @@ namespace DPlatformGame.Animations
             CheckForFlip(direction);
 
             //chosing between animations based on movement
-            if (direction.X == 0)
+            if(!isTouchingGround)
             {
-                AnimationList[0].Update(gameTime);
-                currentTexture = Texturelist[0];
-                currentFrame = AnimationList[0].CurrentFrame.SourceRectangle;
+                AnimationList[2].Update(gameTime);
+                currentTexture = Texturelist[2];
+                currentFrame = AnimationList[2].CurrentFrame.SourceRectangle;
             }
-            else
+            else if (direction.X != 0)
             {
                 AnimationList[1].Update(gameTime);
                 currentTexture = Texturelist[1];
                 currentFrame = AnimationList[1].CurrentFrame.SourceRectangle;
+            }
+            else
+            {
+                AnimationList[0].Update(gameTime);
+                currentTexture = Texturelist[0];
+                currentFrame = AnimationList[0].CurrentFrame.SourceRectangle;
             }
         }
 

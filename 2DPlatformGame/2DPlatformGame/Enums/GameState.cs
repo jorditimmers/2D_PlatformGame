@@ -5,7 +5,6 @@ namespace DPlatformGame.Enums
     {
         Menu,
         Playing,
-        Paused,
         Quiting
     }
 }

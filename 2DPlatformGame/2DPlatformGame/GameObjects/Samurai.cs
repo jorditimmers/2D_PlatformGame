@@ -12,7 +12,7 @@ namespace DPlatformGame.Characters
     {
         public AnimationPool pool;
 
-        public Samurai(Texture2D idleTexture, Texture2D moveTexture)
+        public Samurai(Texture2D idleTexture, Texture2D moveTexture, Texture2D jumpTexture)
         {
             //create animation pool
             pool = new AnimationPool();
@@ -20,6 +20,8 @@ namespace DPlatformGame.Characters
             pool.AnimationList[0].GetFramesFromTextureProperties(idleTexture.Width, idleTexture.Height, 3, 1); //idle
             pool.AddAnimation(new Animation(), moveTexture); //move
             pool.AnimationList[1].GetFramesFromTextureProperties(moveTexture.Width, moveTexture.Height, 12, 1); //move
+            pool.AddAnimation(new Animation(), jumpTexture); //jump
+            pool.AnimationList[2].GetFramesFromTextureProperties(jumpTexture.Width, jumpTexture.Height, 4, 1);
         }
 
         public void Draw(SpriteBatch spriteBatch)
