@@ -26,6 +26,7 @@ namespace DPlatformGame.Animations
         private readonly float horizontalMovementSpeed = 5;
         private readonly float jumpingForce = 15;
 
+        private bool isAttacking = false;
         private bool isTouchingGround
         {
             get
@@ -62,6 +63,14 @@ namespace DPlatformGame.Animations
             var direction = k.ReadInput();
             if (isTouchingGround)
             {
+                if (direction.Y == int.MaxValue && direction.X == 0)
+                {
+                    isAttacking = true;
+                }
+                else
+                {
+                    isAttacking = false;
+                }
                 if (direction.Y == -12345)
                 {
                     velocity.Y = -jumpingForce;
@@ -76,17 +85,46 @@ namespace DPlatformGame.Animations
             {
                 velocity.Y += gravity;
             }
+
             position.X += direction.X * horizontalMovementSpeed;
             position.Y += velocity.Y;
 
             CheckForFlip(direction);
+            AnimationDecider(gameTime, direction);
+        }
 
-            //chosing between animations based on movement
-            if(!isTouchingGround)
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(this.currentTexture, this.position, this.currentFrame, Color.White, 0, new Vector2(0, 0), scale, effect, 0);
+        }
+
+        #region Functions
+
+        public void CheckForFlip(Vector2 direction)
+        {
+            if (direction.X > 0)
+            {
+                effect = SpriteEffects.None;
+            }
+            else if (direction.X < 0)
+            {
+                effect = SpriteEffects.FlipHorizontally;
+            }
+        }
+
+        public void AnimationDecider(GameTime gameTime, Vector2 direction)
+        {
+            if (!isTouchingGround)
             {
                 AnimationList[2].Update(gameTime);
                 currentTexture = Texturelist[2];
                 currentFrame = AnimationList[2].CurrentFrame.SourceRectangle;
+            }
+            else if (isAttacking)
+            {
+                AnimationList[3].Update(gameTime);
+                currentTexture = Texturelist[3];
+                currentFrame = AnimationList[3].CurrentFrame.SourceRectangle;
             }
             else if (direction.X != 0)
             {
@@ -102,22 +140,7 @@ namespace DPlatformGame.Animations
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(this.currentTexture, this.position, this.currentFrame, Color.White, 0, new Vector2(0, 0), scale, effect, 0);
-        }
-
-        public void CheckForFlip(Vector2 direction)
-        {
-            if (direction.X > 0)
-            {
-                effect = SpriteEffects.None;
-            }
-            else if (direction.X < 0)
-            {
-                effect = SpriteEffects.FlipHorizontally;
-            }
-        }
+        #endregion
     }
 }
 

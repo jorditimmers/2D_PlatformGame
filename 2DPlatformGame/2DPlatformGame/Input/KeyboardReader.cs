@@ -24,6 +24,10 @@ namespace DPlatformGame.Input
             {
                 direction.Y = -12345;
             }
+            if (state.IsKeyDown(Keys.Enter))
+            {
+                direction.Y = int.MaxValue;
+            }
             return direction;
         }
     }

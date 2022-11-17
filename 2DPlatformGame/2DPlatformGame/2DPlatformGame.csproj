@@ -19,12 +19,14 @@
     <None Remove="Animations\" />
     <None Remove="Input\" />
     <None Remove="Enums\" />
+    <None Remove="Combat\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
     <Folder Include="Animations\" />
     <Folder Include="Input\" />
     <Folder Include="Enums\" />
+    <Folder Include="Combat\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />
