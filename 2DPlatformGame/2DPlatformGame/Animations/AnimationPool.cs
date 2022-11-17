@@ -10,24 +10,42 @@ namespace DPlatformGame.Animations
 {
     public class AnimationPool
     {
+        #region variables
+
         public List<Animation> AnimationList = new List<Animation>();
         public List<Texture2D> Texturelist = new List<Texture2D>();
         public SpriteEffects effect;
 
         private Vector2 position;
-        private Vector2 speed;
+        private Vector2 velocity;
         private Rectangle currentFrame;
         private Texture2D currentTexture;
         private float scale = 3.0f;
 
-        private readonly Vector2 gravity = new Vector2(0, .5f);
+        private readonly float gravity = 0.5f;
+        private readonly float horizontalMovementSpeed = 5;
+        private readonly float jumpingForce = 15;
+
+        private bool isTouchingGround
+        {
+            get
+            {
+                if (position.Y >= 720 - 64 - (currentTexture.Height * scale) + 6)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        #endregion
 
 
         public AnimationPool()
         {
             effect = SpriteEffects.None;
             position = new Vector2(0, 0);
-            speed = new Vector2(5, 9.81f);
+            velocity = new Vector2(5, 9.81f);
 
         }
 
@@ -42,19 +60,24 @@ namespace DPlatformGame.Animations
         {
             KeyboardReader k = new KeyboardReader();
             var direction = k.ReadInput();
-            if (position.Y >= 720 - 64 - (currentTexture.Height * scale)+6)
+            if (isTouchingGround)
             {
-                speed.Y = 9.81f;
-                position.Y = 720 - 64 - (currentTexture.Height * scale)+6;
+                if (direction.Y == -12345)
+                {
+                    velocity.Y = -jumpingForce;
+                }
+                else
+                {
+                    velocity.Y = 0;
+                    position.Y = 720 - 64 - (currentTexture.Height * scale) + 6; //make sure player is pixel perfect on ground
+                }
             }
             else
             {
-                direction.Y += 1;
-                speed.Y += 0.1f;
-                speed += gravity;
+                velocity.Y += gravity;
             }
-            direction *= speed;
-            position += direction;
+            position.X += direction.X * horizontalMovementSpeed;
+            position.Y += velocity.Y;
 
             CheckForFlip(direction);
 
