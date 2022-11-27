@@ -8,13 +8,15 @@ namespace DPlatformGame.Animations
     public class Animation
     {
         public AnimationFrame CurrentFrame { get; set; }
+        public Rectangle hitBox;
         private List<AnimationFrame> frames;
         private int counter;
         private double secondCounter;
         private int fps = 15;
 
-        public Animation()
+        public Animation(Rectangle hitBox)
         {
+            this.hitBox = hitBox;
             frames = new List<AnimationFrame>();
             counter = 0;
             secondCounter = 0;
@@ -42,6 +44,11 @@ namespace DPlatformGame.Animations
             {
                 counter = 0;
             }
+        }
+
+        public AnimationFrame getFirstFrame()
+        {
+            return frames[0];
         }
 
         public void GetFramesFromTextureProperties(int width, int height, int numberOfWidthSprites, int numberOfHeightSprites)

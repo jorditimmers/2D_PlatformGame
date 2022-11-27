@@ -78,7 +78,7 @@ namespace DPlatformGame.Animations
                 else
                 {
                     velocity.Y = 0;
-                    position.Y = 720 - 64 - (currentTexture.Height * scale) + 6; //make sure player is pixel perfect on ground
+                    position.Y = 720 - 64 - (currentTexture.Height * scale) + 6; //make sure player is on ground properly
                 }
             }
             else
@@ -119,24 +119,28 @@ namespace DPlatformGame.Animations
                 AnimationList[2].Update(gameTime);
                 currentTexture = Texturelist[2];
                 currentFrame = AnimationList[2].CurrentFrame.SourceRectangle;
+                //currentFrame = AnimationList[2].hitBox; DEBUG
             }
             else if (isAttacking)
             {
                 AnimationList[3].Update(gameTime);
                 currentTexture = Texturelist[3];
                 currentFrame = AnimationList[3].CurrentFrame.SourceRectangle;
+                //currentFrame = AnimationList[3].hitBox; DEBUG
             }
             else if (direction.X != 0)
             {
                 AnimationList[1].Update(gameTime);
                 currentTexture = Texturelist[1];
                 currentFrame = AnimationList[1].CurrentFrame.SourceRectangle;
+                //currentFrame = AnimationList[1].hitBox; DEBUG
             }
             else
             {
                 AnimationList[0].Update(gameTime);
                 currentTexture = Texturelist[0];
                 currentFrame = AnimationList[0].CurrentFrame.SourceRectangle;
+                //currentFrame = AnimationList[0].hitBox; DEBUG
             }
         }
 
