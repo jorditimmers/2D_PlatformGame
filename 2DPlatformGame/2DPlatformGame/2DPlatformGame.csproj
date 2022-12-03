@@ -20,6 +20,8 @@
     <None Remove="Input\" />
     <None Remove="Enums\" />
     <None Remove="Combat\" />
+    <None Remove="Terrain\" />
+    <None Remove="Terrain\Blocks\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -27,6 +29,8 @@
     <Folder Include="Input\" />
     <Folder Include="Enums\" />
     <Folder Include="Combat\" />
+    <Folder Include="Terrain\" />
+    <Folder Include="Terrain\Blocks\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

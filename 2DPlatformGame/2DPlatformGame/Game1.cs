@@ -1,6 +1,7 @@
 ﻿using DPlatformGame.Characters;
 using DPlatformGame.Enums;
 using DPlatformGame.GameObjects;
+using DPlatformGame.Terrain;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -20,7 +21,7 @@ public class Game1 : Game
     Texture2D _LevelBackgroundTexture;
     Texture2D _PlayButton;
     Texture2D _BackButton;
-
+    Texture2D _Terrain;
     GameState _GameState;
 
     Texture2D _FloorTexture;
@@ -30,6 +31,8 @@ public class Game1 : Game
     Button backbutton;
 
     Samurai samurai;
+    Blueprint blueprint;
+    TerainBuilder terrain;
 
 
     public Game1()
@@ -43,14 +46,17 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        base.Initialize(); //Put logic AFTER this
+        base.Initialize(); //Put logic AFTER this, otherwise logic will not work
 
-        _FloorRect = new Rectangle(0, 720-64 ,1280,64);
+        _FloorRect = new Rectangle(0, 720 - 64, 1280, 64);
 
         samurai = new Samurai(_SamuraiIdleTexture, _SamuraiMoveTexture, _SamuraiJumpTexture, _SamuraiAttackTexture);
-        playbutton = new Button("playbutton", _PlayButton, (_graphics.PreferredBackBufferWidth/2)-(_PlayButton.Width/2), (_graphics.PreferredBackBufferHeight / 2) - (_PlayButton.Height / 2));
+        playbutton = new Button("playbutton", _PlayButton, (_graphics.PreferredBackBufferWidth / 2) - (_PlayButton.Width / 2), (_graphics.PreferredBackBufferHeight / 2) - (_PlayButton.Height / 2));
         backbutton = new Button("backbutton", _BackButton, (_graphics.PreferredBackBufferWidth / 2) - (_PlayButton.Width / 2), (_graphics.PreferredBackBufferHeight / 2) + 40);
 
+        blueprint = new Blueprint();
+        terrain = new TerainBuilder(blueprint);
+        terrain.LoadTerrain(_Terrain);
 
         _GameState = GameState.Menu;
     }
@@ -71,7 +77,7 @@ public class Game1 : Game
         _LevelBackgroundTexture = Content.Load<Texture2D>("Background");
         _PlayButton = Content.Load<Texture2D>("playbutton");
         _BackButton = Content.Load<Texture2D>("backbutton");
-
+        _Terrain = Content.Load<Texture2D>("Terrain_and_Props"); //Credit: The Flavare
     }
 
     protected override void Update(GameTime gameTime)
@@ -83,7 +89,7 @@ public class Game1 : Game
         {
             playbutton.Update(gameTime);
             _GameState = playbutton.GetGameState();
-            if(_GameState == GameState.Menu)
+            if (_GameState == GameState.Menu)
             {
                 backbutton.Update(gameTime);
                 _GameState = backbutton.GetGameState();
@@ -106,7 +112,7 @@ public class Game1 : Game
     {
         GraphicsDevice.Clear(Color.DarkGray);
 
-        if(_GameState == GameState.Menu)
+        if (_GameState == GameState.Menu)
         {
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
             _spriteBatch.Draw(_LevelBackgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White); //Background
@@ -114,13 +120,14 @@ public class Game1 : Game
             backbutton.Draw(_spriteBatch);
             _spriteBatch.End();
         }
-        else if(_GameState == GameState.Playing)
+        else if (_GameState == GameState.Playing)
         {
             //Draw Characters
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
             _spriteBatch.Draw(_LevelBackgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White); //Background
             //_spriteBatch.Draw(_FloorTexture, _FloorRect, Color.Aqua); //Floor for debugging
             samurai.Draw(_spriteBatch); //Samurai
+            terrain.DrawTerrain(_spriteBatch); //Terrain
             _spriteBatch.End();
         }
 
