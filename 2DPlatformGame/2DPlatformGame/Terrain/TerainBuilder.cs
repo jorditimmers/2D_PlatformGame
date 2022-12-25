@@ -25,7 +25,7 @@ namespace DPlatformGame.Terrain
                 {
                     if (print.board[i, j] == 1)
                     {
-                        blocks.Add(new PlatformBlock(j*40, i*22, texture));
+                        blocks.Add(new PlatformBlock(j*32, i*32, texture));
                     }
                 }
             }
