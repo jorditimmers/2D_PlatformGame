@@ -1,20 +1,22 @@
 ﻿<Properties StartupConfiguration="{3B8BAD41-67B7-442E-ACB2-9ED003ED2557}|Default">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="2DPlatformGame/Terrain/Blueprint.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="2DPlatformGame/Terrain/Blocks/Block.cs">
     <Files>
-      <File FileName="2DPlatformGame/Terrain/Blueprint.cs" Line="10" Column="18" />
-      <File FileName="2DPlatformGame/Animations/AnimationPool.cs" />
-      <File FileName="2DPlatformGame/Terrain/Blocks/Block.cs" />
-      <File FileName="2DPlatformGame/Terrain/Blocks/PlatformBlock.cs" />
+      <File FileName="2DPlatformGame/Game1.cs" Line="28" Column="33" />
+      <File FileName="2DPlatformGame/GameObjects/Samurai.cs" Line="52" Column="174" />
+      <File FileName="2DPlatformGame/Terrain/TerainBuilder.cs" Line="18" Column="40" />
+      <File FileName="2DPlatformGame/Terrain/Blocks/Block.cs" Line="28" Column="10" />
+      <File FileName="2DPlatformGame/Animations/AnimationPool.cs" Line="22" Column="15" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="2DPlatformGame" expanded="True">
             <Node name="2DPlatformGame" expanded="True">
-              <Node name="Animations" expanded="True" />
               <Node name="Terrain" expanded="True">
-                <Node name="Blueprint.cs" selected="True" />
+                <Node name="Blocks" expanded="True">
+                  <Node name="Block.cs" selected="True" />
+                </Node>
               </Node>
             </Node>
           </Node>
@@ -22,10 +24,10 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.2DPlatformGame PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

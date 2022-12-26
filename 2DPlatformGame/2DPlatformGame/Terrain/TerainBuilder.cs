@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DPlatformGame.Interfaces;
 using DPlatformGame.Terrain.Blocks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,10 +11,12 @@ namespace DPlatformGame.Terrain
     public class TerainBuilder
     {
         Blueprint print;
-        List<Block> blocks = new List<Block>();
+
+        public List<Block> blocks { get; set; }
 
         public TerainBuilder(Blueprint print)
         {
+            blocks = new List<Block>();
             this.print = print; 
         }
 
@@ -25,7 +28,15 @@ namespace DPlatformGame.Terrain
                 {
                     if (print.board[i, j] == 1)
                     {
-                        blocks.Add(new PlatformBlock(j*32, i*32, texture));
+                        blocks.Add(new PlatformBlock1(j*32, i*32, texture));
+                    }
+                    else if (print.board[i, j] == 2)
+                    {
+                        blocks.Add(new PlatformBlock2(j * 32, i * 32, texture));
+                    }
+                    else if (print.board[i, j] == 3)
+                    {
+                        blocks.Add(new PlatformBlock3(j * 32, i * 32, texture));
                     }
                 }
             }

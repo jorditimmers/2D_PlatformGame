@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DPlatformGame.Input;
+using DPlatformGame.Terrain;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static System.Collections.Specialized.BitVector32;
@@ -16,11 +17,12 @@ namespace DPlatformGame.Animations
         public List<Texture2D> Texturelist = new List<Texture2D>();
         public SpriteEffects effect;
 
-        private Vector2 position;
+        public Vector2 position;
         private Vector2 velocity;
-        private Rectangle currentFrame;
-        private Texture2D currentTexture;
-        private float scale = 3.0f;
+        public Rectangle currentFrame { get; set; }
+        public Texture2D currentTexture;
+        public Rectangle currentHitBox { get; set; }
+        public float scale = 3.0f;
 
         private readonly float gravity = 0.5f;
         private readonly float horizontalMovementSpeed = 5;
@@ -38,6 +40,7 @@ namespace DPlatformGame.Animations
                 return false;
             }
         }
+        public bool isTouchingBlock = false;
 
         #endregion
 
@@ -61,7 +64,26 @@ namespace DPlatformGame.Animations
         {
             KeyboardReader k = new KeyboardReader();
             var direction = k.ReadInput();
-            if (isTouchingGround)
+            if (isTouchingBlock)
+            {
+                if (direction.Y == int.MaxValue && direction.X == 0)
+                {
+                    isAttacking = true;
+                }
+                else
+                {
+                    isAttacking = false;
+                }
+                if (direction.Y == -12345)
+                {
+                    velocity.Y = -jumpingForce;
+                }
+                else
+                {
+                    velocity.Y = 0;
+                }
+            }
+            else if (isTouchingGround)
             {
                 if (direction.Y == int.MaxValue && direction.X == 0)
                 {
@@ -100,6 +122,12 @@ namespace DPlatformGame.Animations
 
         #region Functions
 
+        //public void BlockCollision(Block b)
+        //{
+        //    isTouchingBlock = true;
+        //    BlockTop = b.BoundingBox.Top;
+        //}
+
         public void CheckForFlip(Vector2 direction)
         {
             if (direction.X > 0)
@@ -114,33 +142,33 @@ namespace DPlatformGame.Animations
 
         public void AnimationDecider(GameTime gameTime, Vector2 direction)
         {
-            if (!isTouchingGround)
+            if (!isTouchingGround && !isTouchingBlock)
             {
                 AnimationList[2].Update(gameTime);
                 currentTexture = Texturelist[2];
                 currentFrame = AnimationList[2].CurrentFrame.SourceRectangle;
-                //currentFrame = AnimationList[2].hitBox; DEBUG
+                currentHitBox = AnimationList[2].hitBox;
             }
             else if (isAttacking)
             {
                 AnimationList[3].Update(gameTime);
                 currentTexture = Texturelist[3];
                 currentFrame = AnimationList[3].CurrentFrame.SourceRectangle;
-                //currentFrame = AnimationList[3].hitBox; DEBUG
+                currentHitBox = AnimationList[3].hitBox;
             }
             else if (direction.X != 0)
             {
                 AnimationList[1].Update(gameTime);
                 currentTexture = Texturelist[1];
                 currentFrame = AnimationList[1].CurrentFrame.SourceRectangle;
-                //currentFrame = AnimationList[1].hitBox; DEBUG
+                currentHitBox = AnimationList[1].hitBox;
             }
             else
             {
                 AnimationList[0].Update(gameTime);
                 currentTexture = Texturelist[0];
                 currentFrame = AnimationList[0].CurrentFrame.SourceRectangle;
-                //currentFrame = AnimationList[0].hitBox; DEBUG
+                currentHitBox = AnimationList[0].hitBox;
             }
         }
 

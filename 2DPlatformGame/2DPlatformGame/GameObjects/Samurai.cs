@@ -6,6 +6,7 @@ using DPlatformGame.Animations;
 using Microsoft.Xna.Framework.Input;
 using DPlatformGame.Input;
 using DPlatformGame.Combat;
+using DPlatformGame.Terrain;
 
 namespace DPlatformGame.Characters
 {
@@ -32,6 +33,38 @@ namespace DPlatformGame.Characters
             pool.AnimationList[2].GetFramesFromTextureProperties(jumpTexture.Width, jumpTexture.Height, 4, 1); //jump
             pool.AddAnimation(new Animation(attackHitBox), attackTexture); //attack
             pool.AnimationList[3].GetFramesFromTextureProperties(attackTexture.Width, attackTexture.Height, 7, 1); //attack
+        }
+
+        public Rectangle Frame
+        {
+            get
+            {
+                return new Rectangle((int)pool.position.X, (int)pool.position.Y, (int)(16*pool.scale), (int)(16*pool.scale));
+            }
+            set { }
+        }
+
+        public void CheckForCollisionsWithTerrain(TerainBuilder terrain)
+        {
+            int count = 0;
+            foreach (Block b in terrain.blocks)
+            {
+                if (b.BoundingBox.Intersects(this.Frame))
+                {
+                    Console.WriteLine("HIT"); //Debug
+
+                    count++;
+                    //pool.position.Y = b.Position.Y-(pool.currentTexture.Height*pool.scale);
+                }
+            }
+            if (count != 0)
+            {
+                pool.isTouchingBlock = true;
+            }
+            else
+            {
+                pool.isTouchingBlock = false;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)

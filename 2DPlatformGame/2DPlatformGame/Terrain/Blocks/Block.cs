@@ -14,20 +14,26 @@ namespace DPlatformGame.Terrain
         public Color Color { get; set; }
         public Texture2D Texture { get; set; }
 
+        public Rectangle BoundingBox { get; set; }
+
         public Block(int x, int y, Texture2D texture)
         {
             this.Position = new Vector2(x, y);
             this.Passable = false;
             this.Color = Color.White;
             this.Texture = texture;
+            this.Frame = new Rectangle((int)Position.X, (int)Position.Y, 32, 32); //32 want 16x16 worden aan scale 2 gedrawt
+            this.BoundingBox = new Rectangle(x, y, 32, 32);
         }
+
+        public bool CollidesWithObject(IGameObject obj)
+        {
+            return obj.Frame.Intersects(this.BoundingBox);
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, Position, Color);
-        }
-        public virtual void IsCollidedWithEvent(Samurai collider)
-        {
-            //CollideWithEvent.Execute();
         }
 
         public void Update(GameTime gameTime)

@@ -1,4 +1,5 @@
-﻿using DPlatformGame.Characters;
+﻿using System;
+using DPlatformGame.Characters;
 using DPlatformGame.Enums;
 using DPlatformGame.GameObjects;
 using DPlatformGame.Terrain;
@@ -24,8 +25,8 @@ public class Game1 : Game
     Texture2D _Terrain;
     GameState _GameState;
 
-    Texture2D _FloorTexture;
-    Rectangle _FloorRect;
+    Texture2D _FloorTexture; //FOR DEBUG
+    Rectangle _FloorRect; //FOR DEBUG
 
     Button playbutton;
     Button backbutton;
@@ -33,7 +34,6 @@ public class Game1 : Game
     Samurai samurai;
     Blueprint blueprint;
     TerainBuilder terrain;
-
 
     public Game1()
     {
@@ -46,7 +46,7 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        base.Initialize(); //Put logic AFTER this, otherwise logic will not work
+        base.Initialize(); //Put logic AFTER this, otherwise it won't work
 
         _FloorRect = new Rectangle(0, 720 - 64, 1280, 64);
 
@@ -78,6 +78,7 @@ public class Game1 : Game
         _PlayButton = Content.Load<Texture2D>("playbutton");
         _BackButton = Content.Load<Texture2D>("backbutton");
         _Terrain = Content.Load<Texture2D>("Terrain_and_Props"); //Credit: The Flavare
+
     }
 
     protected override void Update(GameTime gameTime)
@@ -99,6 +100,7 @@ public class Game1 : Game
         {
             //Update characters
             samurai.Update(gameTime);
+            samurai.CheckForCollisionsWithTerrain(terrain);
         }
         else if (_GameState == GameState.Quiting)
         {
