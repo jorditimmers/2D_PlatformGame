@@ -107,11 +107,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/2DPlatformGame.csproj",
+      "projectUniqueName": "/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/2DPlatformGame.csproj",
       "projectName": "2DPlatformGame",
-      "projectPath": "/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/2DPlatformGame.csproj",
+      "projectPath": "/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/2DPlatformGame.csproj",
       "packagesPath": "/Users/jorditimmers/.nuget/packages/",
-      "outputPath": "/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/obj/",
+      "outputPath": "/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/jorditimmers/.nuget/NuGet/NuGet.Config"

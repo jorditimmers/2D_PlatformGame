@@ -88,19 +88,19 @@ public class Game1 : Game
 
         if (_GameState == GameState.Menu)
         {
-            playbutton.Update(gameTime);
+            playbutton.Update(gameTime, terrain);
             _GameState = playbutton.GetGameState();
             if (_GameState == GameState.Menu)
             {
-                backbutton.Update(gameTime);
+                backbutton.Update(gameTime, terrain);
                 _GameState = backbutton.GetGameState();
             }
         }
         else if (_GameState == GameState.Playing)
         {
             //Update characters
-            samurai.Update(gameTime);
-            samurai.CheckForCollisionsWithTerrain(terrain);
+            samurai.Update(gameTime, terrain);
+            //samurai.CheckForCollisionsWithTerrain(terrain);
         }
         else if (_GameState == GameState.Quiting)
         {

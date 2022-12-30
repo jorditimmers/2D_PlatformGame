@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DPlatformGame.Input;
+using DPlatformGame.Interfaces;
 using DPlatformGame.Terrain;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -9,7 +10,7 @@ using static System.Formats.Asn1.AsnWriter;
 
 namespace DPlatformGame.Animations
 {
-    public class AnimationPool
+    public class AnimationPool : ICollision
     {
         #region variables
 
@@ -29,6 +30,7 @@ namespace DPlatformGame.Animations
         private readonly float jumpingForce = 15;
 
         private bool isAttacking = false;
+        private bool isInAir = false;
         private bool isTouchingGround
         {
             get
@@ -39,6 +41,15 @@ namespace DPlatformGame.Animations
                 }
                 return false;
             }
+        }
+
+        public Rectangle Frame
+        {
+            get
+            {
+                return new Rectangle((int)this.position.X, (int)this.position.Y, (int)(16 * this.scale), (int)(16 * this.scale));
+            }
+            set { }
         }
         public bool isTouchingBlock = false;
 
@@ -60,30 +71,15 @@ namespace DPlatformGame.Animations
             this.Texturelist.Add(t);
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, TerainBuilder terrain)
         {
             KeyboardReader k = new KeyboardReader();
             var direction = k.ReadInput();
-            if (isTouchingBlock)
+            if(isInAir && direction.Y == -12345) //for not double jumping through platform | Basicly saying, if already in air don't activte jump ever
             {
-                if (direction.Y == int.MaxValue && direction.X == 0)
-                {
-                    isAttacking = true;
-                }
-                else
-                {
-                    isAttacking = false;
-                }
-                if (direction.Y == -12345)
-                {
-                    velocity.Y = -jumpingForce;
-                }
-                else
-                {
-                    velocity.Y = 0;
-                }
+                direction.Y = 0;
             }
-            else if (isTouchingGround)
+            if (isTouchingGround)
             {
                 if (direction.Y == int.MaxValue && direction.X == 0)
                 {
@@ -96,9 +92,11 @@ namespace DPlatformGame.Animations
                 if (direction.Y == -12345)
                 {
                     velocity.Y = -jumpingForce;
+                    isInAir = true;
                 }
                 else
                 {
+                    isInAir = false;
                     velocity.Y = 0;
                     position.Y = 720 - 64 - (currentTexture.Height * scale) + 6; //make sure player is on ground properly
                 }
@@ -108,8 +106,37 @@ namespace DPlatformGame.Animations
                 velocity.Y += gravity;
             }
 
-            position.X += direction.X * horizontalMovementSpeed;
-            position.Y += velocity.Y;
+            Rectangle r = new Rectangle((int)(position.X + (direction.X * horizontalMovementSpeed)), (int)(position.Y + velocity.Y), (int)(16 * this.scale), (int)(16 * this.scale));
+
+            if (CheckForCollisionsWithTerrain(r, terrain)) //if collision with terrain, don't move vertically, unless you jump when already on the terrain
+            {
+                isTouchingBlock = true; //this is for animation checker
+                isInAir = false;
+                if (direction.Y == int.MaxValue && direction.X == 0)
+                {
+                    isAttacking = true;
+                }
+                else
+                {
+                    isAttacking = false;
+                }
+                if (direction.Y == -12345)
+                {
+                    velocity.Y = -jumpingForce;
+                }
+                else
+                {
+                    velocity.Y = 0;
+                }
+                position.X += direction.X * horizontalMovementSpeed;
+                position.Y += velocity.Y;
+            }
+            else
+            {
+                isTouchingBlock = false; //this is for animation checker
+                position.X += direction.X * horizontalMovementSpeed;
+                position.Y += velocity.Y;
+            }
 
             CheckForFlip(direction);
             AnimationDecider(gameTime, direction);
@@ -169,6 +196,29 @@ namespace DPlatformGame.Animations
                 currentTexture = Texturelist[0];
                 currentFrame = AnimationList[0].CurrentFrame.SourceRectangle;
                 currentHitBox = AnimationList[0].hitBox;
+            }
+        }
+
+        public bool CheckForCollisionsWithTerrain(Rectangle r, TerainBuilder terrain)
+        {
+            int count = 0;
+            foreach (Block b in terrain.blocks)
+            {
+                if (b.BoundingBox.Intersects(r))
+                {
+                    Console.WriteLine("HIT"); //Debug
+
+                    count++;
+                    //pool.position.Y = b.Position.Y-(pool.currentTexture.Height*pool.scale);
+                }
+            }
+            if (count != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

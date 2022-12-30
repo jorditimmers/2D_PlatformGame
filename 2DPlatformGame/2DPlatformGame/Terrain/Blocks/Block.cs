@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DPlatformGame.Terrain
 {
-    public abstract class Block : IGameObject
+    public abstract class Block : IGameObject, ICollision
     {
         public Vector2 Position { get; set; }
         public Rectangle Frame { get; set; }
@@ -26,17 +26,12 @@ namespace DPlatformGame.Terrain
             this.BoundingBox = new Rectangle(x, y, 32, 32);
         }
 
-        public bool CollidesWithObject(IGameObject obj)
-        {
-            return obj.Frame.Intersects(this.BoundingBox);
-        }
-
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, Position, Color);
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, TerainBuilder terrain)
         {
             throw new NotImplementedException();
         }

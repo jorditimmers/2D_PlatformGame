@@ -35,46 +35,14 @@ namespace DPlatformGame.Characters
             pool.AnimationList[3].GetFramesFromTextureProperties(attackTexture.Width, attackTexture.Height, 7, 1); //attack
         }
 
-        public Rectangle Frame
-        {
-            get
-            {
-                return new Rectangle((int)pool.position.X, (int)pool.position.Y, (int)(16*pool.scale), (int)(16*pool.scale));
-            }
-            set { }
-        }
-
-        public void CheckForCollisionsWithTerrain(TerainBuilder terrain)
-        {
-            int count = 0;
-            foreach (Block b in terrain.blocks)
-            {
-                if (b.BoundingBox.Intersects(this.Frame))
-                {
-                    Console.WriteLine("HIT"); //Debug
-
-                    count++;
-                    //pool.position.Y = b.Position.Y-(pool.currentTexture.Height*pool.scale);
-                }
-            }
-            if (count != 0)
-            {
-                pool.isTouchingBlock = true;
-            }
-            else
-            {
-                pool.isTouchingBlock = false;
-            }
-        }
-
         public void Draw(SpriteBatch spriteBatch)
         {
             pool.Draw(spriteBatch);
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, TerainBuilder terrain)
         {
-            pool.Update(gameTime);
+            pool.Update(gameTime, terrain);
         }
     }
 }

@@ -4,19 +4,19 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/Content/backbutton.png</File>
-    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/Content/Background.png</File>
-    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/Content/playbutton.png</File>
-    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/Content/samurai/death.png</File>
-    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/Content/samurai/heavy-attack.png</File>
-    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/Content/samurai/idle.png</File>
-    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/Content/samurai/jump.png</File>
-    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/Content/samurai/light-attack.png</File>
-    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/Content/samurai/roll.png</File>
-    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/Content/samurai/run-sword.png</File>
-    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/Content/samurai/run.png</File>
-    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/Content/samurai/take-dmg.png</File>
-    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/Project/2DPlatformGame/2DPlatformGame/Content/Terrain_and_Props.png</File>
+    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/backbutton.png</File>
+    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/Background.png</File>
+    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/playbutton.png</File>
+    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/samurai/death.png</File>
+    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/samurai/heavy-attack.png</File>
+    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/samurai/idle.png</File>
+    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/samurai/jump.png</File>
+    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/samurai/light-attack.png</File>
+    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/samurai/roll.png</File>
+    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/samurai/run-sword.png</File>
+    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/samurai/run.png</File>
+    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/samurai/take-dmg.png</File>
+    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/Terrain_and_Props.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

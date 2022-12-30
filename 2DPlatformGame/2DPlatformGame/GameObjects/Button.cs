@@ -4,6 +4,7 @@ using _2DPlatformGame;
 using DPlatformGame.Enums;
 using DPlatformGame.Input;
 using DPlatformGame.Interfaces;
+using DPlatformGame.Terrain;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -47,7 +48,7 @@ namespace DPlatformGame.GameObjects
             spriteBatch.Draw(texture, new Rectangle((int)Button_X, (int)Button_Y, texture.Width, texture.Height), Color.White);
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, TerainBuilder terrain)
         {
             MouseInput.Update();
         }
