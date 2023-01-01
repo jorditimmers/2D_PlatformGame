@@ -205,12 +205,16 @@ namespace DPlatformGame.Animations
             int count = 0;
             foreach (Block b in terrain.blocks)
             {
-                if (b.BoundingBox.Intersects(r))
+                if (b.BoundingBox.Intersects(r) && !b.Passable)
                 {
                     Console.WriteLine("HIT"); //Debug
 
                     count++;
                     //pool.position.Y = b.Position.Y-(pool.currentTexture.Height*pool.scale);
+                }
+                if (b.BoundingBox.Intersects(r) && b.Passable)
+                {
+                    Console.WriteLine("Winner winner chicken dinner"); //Debug
                 }
             }
             if (count != 0)

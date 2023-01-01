@@ -12,7 +12,7 @@ namespace DPlatformGame.Terrain.Blocks
         {
             this.Frame = new Rectangle(192,156,16,16);
             this.Position = new Vector2(x, y);
-            this.Passable = true;
+            this.Passable = false;
             this.Color = Color.GreenYellow;
             this.Texture = texture;
         }
