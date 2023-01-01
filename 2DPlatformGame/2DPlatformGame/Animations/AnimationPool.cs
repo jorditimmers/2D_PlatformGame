@@ -106,9 +106,10 @@ namespace DPlatformGame.Animations
                 velocity.Y += gravity;
             }
 
-            Rectangle r = new Rectangle((int)(position.X + (direction.X * horizontalMovementSpeed)), (int)(position.Y + velocity.Y), (int)(16 * this.scale), (int)(16 * this.scale));
+            //calculate next position
+            Rectangle nextPos = new Rectangle((int)(position.X + (direction.X * horizontalMovementSpeed) + (currentHitBox.X*scale)), (int)(position.Y + velocity.Y + (currentHitBox.Y * scale)), (int)(currentHitBox.Width*scale), (int)(currentHitBox.Height*scale));
 
-            if (CheckForCollisionsWithTerrain(r, terrain)) //if collision with terrain, don't move vertically, unless you jump when already on the terrain
+            if (CheckForCollisionsWithTerrain(nextPos, terrain)) //if collision with terrain, don't move vertically, unless you jump when already on the terrain
             {
                 isTouchingBlock = true; //this is for animation checker
                 isInAir = false;

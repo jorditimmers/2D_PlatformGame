@@ -38,6 +38,10 @@ namespace DPlatformGame.Terrain
                     {
                         blocks.Add(new PlatformBlock3(j * 32, i * 32, texture));
                     }
+                    else if (print.board[i, j] == 4)
+                    {
+                        blocks.Add(new ExitBlock(j * 32, i * 32, texture));
+                    }
                 }
             }
         }
