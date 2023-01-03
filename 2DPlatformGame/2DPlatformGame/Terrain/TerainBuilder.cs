@@ -10,11 +10,11 @@ namespace DPlatformGame.Terrain
 {
     public class TerainBuilder
     {
-        Blueprint print;
+        IBlueprint print;
 
         public List<Block> blocks { get; set; }
 
-        public TerainBuilder(Blueprint print)
+        public TerainBuilder(IBlueprint print)
         {
             blocks = new List<Block>();
             this.print = print; 

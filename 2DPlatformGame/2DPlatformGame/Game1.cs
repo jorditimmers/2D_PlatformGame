@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using DPlatformGame.Characters;
 using DPlatformGame.Enums;
 using DPlatformGame.GameObjects;
@@ -23,17 +23,23 @@ public class Game1 : Game
     Texture2D _PlayButton;
     Texture2D _BackButton;
     Texture2D _Terrain;
+    Texture2D _FloatingSkull;
     GameState _GameState;
 
     Texture2D _FloorTexture; //FOR DEBUG
     Rectangle _FloorRect; //FOR DEBUG
 
     Button playbutton;
+    Button play2button;
     Button backbutton;
 
     Samurai samurai;
+    FloatingSkull floatingSkull;
     Blueprint blueprint;
+    Blueprint2 blueprint2;
     TerainBuilder terrain;
+    TerainBuilder terrain1;
+    TerainBuilder terrain2;
 
     public Game1()
     {
@@ -51,12 +57,18 @@ public class Game1 : Game
         _FloorRect = new Rectangle(0, 720 - 64, 1280, 64);
 
         samurai = new Samurai(_SamuraiIdleTexture, _SamuraiMoveTexture, _SamuraiJumpTexture, _SamuraiAttackTexture);
-        playbutton = new Button("playbutton", _PlayButton, (_graphics.PreferredBackBufferWidth / 2) - (_PlayButton.Width / 2), (_graphics.PreferredBackBufferHeight / 2) - (_PlayButton.Height / 2));
-        backbutton = new Button("backbutton", _BackButton, (_graphics.PreferredBackBufferWidth / 2) - (_PlayButton.Width / 2), (_graphics.PreferredBackBufferHeight / 2) + 40);
+        floatingSkull = new FloatingSkull(_FloatingSkull);
+        playbutton = new Button("playbutton", _BackButton, (_graphics.PreferredBackBufferWidth / 2) - (_PlayButton.Width / 2), (_graphics.PreferredBackBufferHeight / 2) - (_PlayButton.Height / 2) - 40);
+        play2button = new Button("play2button", _BackButton, (_graphics.PreferredBackBufferWidth / 2) - (_PlayButton.Width / 2), (_graphics.PreferredBackBufferHeight / 2));
+        backbutton = new Button("backbutton", _BackButton, (_graphics.PreferredBackBufferWidth / 2) - (_PlayButton.Width / 2), (_graphics.PreferredBackBufferHeight / 2) + (_PlayButton.Height / 2) + 40);
 
         blueprint = new Blueprint();
-        terrain = new TerainBuilder(blueprint);
-        terrain.LoadTerrain(_Terrain);
+        blueprint2 = new Blueprint2();
+        terrain1 = new TerainBuilder(blueprint);
+        terrain1.LoadTerrain(_Terrain);
+        terrain2 = new TerainBuilder(blueprint2);
+        terrain2.LoadTerrain(_Terrain);
+
 
         _GameState = GameState.Menu;
     }
@@ -78,6 +90,7 @@ public class Game1 : Game
         _PlayButton = Content.Load<Texture2D>("playbutton");
         _BackButton = Content.Load<Texture2D>("backbutton");
         _Terrain = Content.Load<Texture2D>("Terrain_and_Props"); //Credit: The Flavare
+        _FloatingSkull = Content.Load<Texture2D>("floatingskull"); //Credit: unTied Games
 
     }
 
@@ -88,8 +101,22 @@ public class Game1 : Game
 
         if (_GameState == GameState.Menu)
         {
+            samurai.pool.position = new Vector2(0,0);
             playbutton.Update(gameTime, terrain);
             _GameState = playbutton.GetGameState();
+            if (_GameState == GameState.Playing)//checking if terrain needs to be changed
+            {
+                terrain = terrain1;
+            }
+            else if (_GameState == GameState.Menu)
+            {
+                play2button.Update(gameTime, terrain);
+                _GameState = play2button.GetGameState();
+                if(_GameState == GameState.Playing2)//checking if terrain needs to be changed
+                {
+                    terrain = terrain2;
+                }
+            }
             if (_GameState == GameState.Menu)
             {
                 backbutton.Update(gameTime, terrain);
@@ -99,8 +126,14 @@ public class Game1 : Game
         else if (_GameState == GameState.Playing)
         {
             //Update characters
+            floatingSkull.Update(gameTime, terrain);
             samurai.Update(gameTime, terrain);
-            //samurai.CheckForCollisionsWithTerrain(terrain);
+        }
+        else if (_GameState == GameState.Playing2)
+        {
+            terrain = terrain2;
+            //Update characters
+            samurai.Update(gameTime, terrain);
         }
         else if (_GameState == GameState.Quiting)
         {
@@ -119,10 +152,22 @@ public class Game1 : Game
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
             _spriteBatch.Draw(_LevelBackgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White); //Background
             playbutton.Draw(_spriteBatch);
+            play2button.Draw(_spriteBatch);
             backbutton.Draw(_spriteBatch);
             _spriteBatch.End();
         }
         else if (_GameState == GameState.Playing)
+        {
+            //Draw Characters
+            _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
+            _spriteBatch.Draw(_LevelBackgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White); //Background
+            //_spriteBatch.Draw(_FloorTexture, _FloorRect, Color.Aqua); //Floor for debugging
+            samurai.Draw(_spriteBatch); //Samurai
+            floatingSkull.Draw(_spriteBatch); //floatingSkull
+            terrain.DrawTerrain(_spriteBatch); //Terrain
+            _spriteBatch.End();
+        }
+        else if (_GameState == GameState.Playing2)
         {
             //Draw Characters
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);

@@ -16,7 +16,6 @@ namespace DPlatformGame.GameObjects
         public int Button_X { get; set; }
         public int Button_Y { get; set; }
         public string Name { get; set; }
-        public Rectangle Frame { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         private Texture2D texture;
 
@@ -63,6 +62,8 @@ namespace DPlatformGame.GameObjects
                         return GameState.Playing;
                     case "backbutton":
                         return GameState.Quiting;
+                    case "play2button":
+                        return GameState.Playing2;
                     default:
                         break;
                 }

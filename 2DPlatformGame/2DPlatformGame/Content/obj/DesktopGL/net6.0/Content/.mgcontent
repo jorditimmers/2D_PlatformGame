@@ -6,6 +6,7 @@
   <SourceFiles>
     <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/backbutton.png</File>
     <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/Background.png</File>
+    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/floatingskull.png</File>
     <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/playbutton.png</File>
     <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/samurai/death.png</File>
     <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/samurai/heavy-attack.png</File>
@@ -19,6 +20,7 @@
     <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/Terrain_and_Props.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/samurai/take-dmg.png</SourceFile>
-  <SourceTime>2022-12-26T15:56:35.9336115+01:00</SourceTime>
-  <DestFile>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/bin/DesktopGL/samurai/take-dmg.xnb</DestFile>
-  <DestTime>2023-01-03T14:36:38.6656698+01:00</DestTime>
+  <SourceFile>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/floatingskull.png</SourceFile>
+  <SourceTime>2018-10-31T14:10:38+01:00</SourceTime>
+  <DestFile>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/bin/DesktopGL/floatingskull.xnb</DestFile>
+  <DestTime>2023-01-03T14:38:34.1778506+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T11:44:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
