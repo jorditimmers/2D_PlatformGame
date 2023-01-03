@@ -7,15 +7,28 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DPlatformGame.GameObjects
 {
-    public class FloatingSkull : IGameObject
+    public class FloatingSkull : IGameObject, ICollision
     {
         Texture2D floatingTexture;
         Vector2 position;
         Animation anim;
         public SpriteEffects effect;
+        bool goesRight = false;
 
         public AnimationPool pool;
-        public float scale = 3.0f;
+        public float scale = 2.0f;
+
+        public Rectangle Frame
+        {
+            get
+            {
+                return new Rectangle((int)position.X,(int)position.Y,floatingTexture.Width / 4, floatingTexture.Height / 4);
+            }
+            set
+            {
+                Frame = value;
+            }
+        }
 
         public FloatingSkull(Texture2D t)
         {
@@ -38,7 +51,25 @@ namespace DPlatformGame.GameObjects
         {
             //720 - 64 - (currentTexture.Height * scale) + 6
             anim.Update(gameTime);
-            position.X -= 5;
+            if (goesRight)
+            {
+                effect = SpriteEffects.None;
+                position.X += 3;
+                if (position.X >= 1200)
+                {
+                    goesRight = false;
+                }
+            }
+            else
+            {
+                effect = SpriteEffects.FlipHorizontally;
+                position.X -= 3;
+                if (position.X <= 0)
+                {
+                    goesRight = true;
+                }
+            }
+
         }
     }
 }

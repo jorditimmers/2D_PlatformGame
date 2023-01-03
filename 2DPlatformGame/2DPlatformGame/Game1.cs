@@ -1,5 +1,6 @@
 ﻿    using System;
 using DPlatformGame.Characters;
+using DPlatformGame.Combat;
 using DPlatformGame.Enums;
 using DPlatformGame.GameObjects;
 using DPlatformGame.Terrain;
@@ -28,6 +29,7 @@ public class Game1 : Game
 
     Texture2D _FloorTexture; //FOR DEBUG
     Rectangle _FloorRect; //FOR DEBUG
+    SpriteFont font;
 
     Button playbutton;
     Button play2button;
@@ -57,10 +59,10 @@ public class Game1 : Game
         _FloorRect = new Rectangle(0, 720 - 64, 1280, 64);
 
         samurai = new Samurai(_SamuraiIdleTexture, _SamuraiMoveTexture, _SamuraiJumpTexture, _SamuraiAttackTexture);
-        floatingSkull = new FloatingSkull(_FloatingSkull);
         playbutton = new Button("playbutton", _BackButton, (_graphics.PreferredBackBufferWidth / 2) - (_PlayButton.Width / 2), (_graphics.PreferredBackBufferHeight / 2) - (_PlayButton.Height / 2) - 40);
         play2button = new Button("play2button", _BackButton, (_graphics.PreferredBackBufferWidth / 2) - (_PlayButton.Width / 2), (_graphics.PreferredBackBufferHeight / 2));
         backbutton = new Button("backbutton", _BackButton, (_graphics.PreferredBackBufferWidth / 2) - (_PlayButton.Width / 2), (_graphics.PreferredBackBufferHeight / 2) + (_PlayButton.Height / 2) + 40);
+        floatingSkull = new FloatingSkull(_FloatingSkull);
 
         blueprint = new Blueprint();
         blueprint2 = new Blueprint2();
@@ -91,6 +93,7 @@ public class Game1 : Game
         _BackButton = Content.Load<Texture2D>("backbutton");
         _Terrain = Content.Load<Texture2D>("Terrain_and_Props"); //Credit: The Flavare
         _FloatingSkull = Content.Load<Texture2D>("floatingskull"); //Credit: unTied Games
+        font = Content.Load<SpriteFont>("gamefont");
 
     }
 
@@ -126,14 +129,23 @@ public class Game1 : Game
         else if (_GameState == GameState.Playing)
         {
             //Update characters
-            floatingSkull.Update(gameTime, terrain);
             samurai.Update(gameTime, terrain);
+            floatingSkull.Update(gameTime, terrain);
+            if(CheckCollision.Check(samurai, floatingSkull))
+            {
+                Console.WriteLine("YOU DEAD");
+                Die();
+            }
         }
         else if (_GameState == GameState.Playing2)
         {
             terrain = terrain2;
             //Update characters
             samurai.Update(gameTime, terrain);
+        }
+        else if (_GameState == GameState.Dead)
+        {
+
         }
         else if (_GameState == GameState.Quiting)
         {
@@ -177,7 +189,19 @@ public class Game1 : Game
             terrain.DrawTerrain(_spriteBatch); //Terrain
             _spriteBatch.End();
         }
+        else if (_GameState == GameState.Dead)
+        {
+            _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
+            _spriteBatch.Draw(_LevelBackgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White); //Background
+            _spriteBatch.DrawString(font, "You died, press ESC to go back to the menu.", new Vector2(100,100), Color.Black);
+            _spriteBatch.End();
+        }
 
         base.Draw(gameTime);
+    }
+
+    public void Die()
+    {
+        _GameState = GameState.Dead;
     }
 }

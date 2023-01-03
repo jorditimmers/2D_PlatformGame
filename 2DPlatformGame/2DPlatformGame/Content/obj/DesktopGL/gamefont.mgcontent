@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/gamefont.spritefont</SourceFile>
+  <SourceTime>2023-01-03T16:56:19.384556+01:00</SourceTime>
+  <DestFile>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/bin/DesktopGL/gamefont.xnb</DestFile>
+  <DestTime>2023-01-03T16:57:49.9001768+01:00</DestTime>
+  <Importer>FontDescriptionImporter</Importer>
+  <ImporterTime>2022-07-26T11:44:56+02:00</ImporterTime>
+  <Processor>FontDescriptionProcessor</Processor>
+  <ProcessorTime>2022-07-26T11:44:56+02:00</ProcessorTime>
+  <Parameters>
+    <Key>PremultiplyAlpha</Key>
+    <Value>True</Value>
+  </Parameters>
+  <Parameters>
+    <Key>TextureFormat</Key>
+    <Value>Compressed</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

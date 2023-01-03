@@ -75,3 +75,4 @@
 /Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/obj/Debug/net6.0/2DPlatformGame.genruntimeconfig.cache
 /Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/obj/Debug/net6.0/ref/2DPlatformGame.dll
 /Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/floatingskull.xnb
+/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/gamefont.xnb

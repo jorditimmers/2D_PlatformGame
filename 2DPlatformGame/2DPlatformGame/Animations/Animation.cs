@@ -63,6 +63,7 @@ namespace DPlatformGame.Animations
                     frames.Add(new AnimationFrame(new Rectangle(x, y, widthOfFrame, heightOfFrame)));
                 }
             }
+            CurrentFrame = frames[0];
         }
     }
 }

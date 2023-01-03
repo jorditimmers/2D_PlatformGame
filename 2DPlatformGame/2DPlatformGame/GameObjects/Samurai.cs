@@ -10,7 +10,7 @@ using DPlatformGame.Terrain;
 
 namespace DPlatformGame.Characters
 {
-    public class Samurai : IGameObject
+    public class Samurai : IGameObject, ICollision
     {
         public AnimationPool pool;
         public Health health;
@@ -33,6 +33,18 @@ namespace DPlatformGame.Characters
             pool.AnimationList[2].GetFramesFromTextureProperties(jumpTexture.Width, jumpTexture.Height, 4, 1); //jump
             pool.AddAnimation(new Animation(attackHitBox), attackTexture); //attack
             pool.AnimationList[3].GetFramesFromTextureProperties(attackTexture.Width, attackTexture.Height, 7, 1); //attack
+        }
+
+        public Rectangle Frame
+        {
+            get
+            {
+                return pool.Frame;
+            }
+            set
+            {
+                Frame = value;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)

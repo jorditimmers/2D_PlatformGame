@@ -49,6 +49,13 @@
 /processorParam:TextureFormat=Color
 /build:floatingskull.png
 
+#begin gamefont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:gamefont.spritefont
+
 #begin playbutton.png
 /importer:TextureImporter
 /processor:TextureProcessor
