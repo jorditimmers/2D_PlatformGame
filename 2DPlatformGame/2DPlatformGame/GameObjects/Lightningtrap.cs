@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DPlatformGame.GameObjects
 {
-    public class FloatingSkull : IGameObject, ICollision
+    public class Lightningtrap : IGameObject, ICollision
     {
         Texture2D lightningTexture;
         Vector2 position;
@@ -22,7 +22,7 @@ namespace DPlatformGame.GameObjects
         {
             get
             {
-                return new Rectangle((int)position.X,(int)position.Y,lightningTexture.Width / 4, lightningTexture.Height / 4);
+                return new Rectangle((int)position.X + lightningTexture.Width / 24, (int)position.Y, lightningTexture.Width / 24, (int)(lightningTexture.Height * scale));
             }
             set
             {
@@ -30,16 +30,16 @@ namespace DPlatformGame.GameObjects
             }
         }
 
-        public FloatingSkull(Texture2D t)
+        public Lightningtrap(Texture2D t)
         {
             this.lightningTexture = t;
             effect = SpriteEffects.None;
 
-            Rectangle hitBox = new Rectangle(0, 0, lightningTexture.Width/4, lightningTexture.Height/4);
-            position = new Vector2(1000, 720 - 64 - (lightningTexture.Height/4 * scale) + 6);
+            Rectangle hitBox = new Rectangle(0, 0, lightningTexture.Width / 12, lightningTexture.Height / 1);
+            position = new Vector2(700, 469);
 
             anim = new Animation(hitBox);
-            anim.GetFramesFromTextureProperties(lightningTexture.Width, lightningTexture.Height, 4, 4);
+            anim.GetFramesFromTextureProperties(lightningTexture.Width, lightningTexture.Height, 12, 1);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -51,24 +51,6 @@ namespace DPlatformGame.GameObjects
         {
             //720 - 64 - (currentTexture.Height * scale) + 6
             anim.Update(gameTime);
-            if (goesRight)
-            {
-                effect = SpriteEffects.None;
-                position.X += 3;
-                if (position.X >= 1200)
-                {
-                    goesRight = false;
-                }
-            }
-            else
-            {
-                effect = SpriteEffects.FlipHorizontally;
-                position.X -= 3;
-                if (position.X <= 0)
-                {
-                    goesRight = true;
-                }
-            }
 
         }
     }

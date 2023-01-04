@@ -13,7 +13,6 @@ namespace DPlatformGame.Characters
     public class Samurai : IGameObject, ICollision
     {
         public AnimationPool pool;
-        public Health health;
 
         public Samurai(Texture2D idleTexture, Texture2D moveTexture, Texture2D jumpTexture, Texture2D attackTexture)
         {

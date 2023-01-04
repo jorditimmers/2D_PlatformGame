@@ -8,7 +8,7 @@ namespace DPlatformGame.Terrain.Blocks
     {
         public ExitBlock(int x, int y, Texture2D texture) : base(x, y, texture)
         {
-            this.Frame = new Rectangle(168, 456, 53, 24);
+            this.SpriteFrame = new Rectangle(168, 456, 53, 24);
             this.Position = new Vector2(x, y);
             this.Passable = true;
             this.Color = Color.GreenYellow;

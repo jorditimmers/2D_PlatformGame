@@ -7,7 +7,8 @@ namespace DPlatformGame.Enums
         Playing,
         Playing2,
         Quiting,
-        Dead
+        Dead,
+        Won
     }
 }
 

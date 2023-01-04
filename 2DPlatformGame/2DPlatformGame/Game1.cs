@@ -25,6 +25,7 @@ public class Game1 : Game
     Texture2D _BackButton;
     Texture2D _Terrain;
     Texture2D _FloatingSkull;
+    Texture2D _LightningTrap;
     GameState _GameState;
 
     Texture2D _FloorTexture; //FOR DEBUG
@@ -37,6 +38,7 @@ public class Game1 : Game
 
     Samurai samurai;
     FloatingSkull floatingSkull;
+    Lightningtrap lightningtrap;
     Blueprint blueprint;
     Blueprint2 blueprint2;
     TerainBuilder terrain;
@@ -63,6 +65,7 @@ public class Game1 : Game
         play2button = new Button("play2button", _BackButton, (_graphics.PreferredBackBufferWidth / 2) - (_PlayButton.Width / 2), (_graphics.PreferredBackBufferHeight / 2));
         backbutton = new Button("backbutton", _BackButton, (_graphics.PreferredBackBufferWidth / 2) - (_PlayButton.Width / 2), (_graphics.PreferredBackBufferHeight / 2) + (_PlayButton.Height / 2) + 40);
         floatingSkull = new FloatingSkull(_FloatingSkull);
+        lightningtrap = new Lightningtrap(_LightningTrap);
 
         blueprint = new Blueprint();
         blueprint2 = new Blueprint2();
@@ -93,6 +96,7 @@ public class Game1 : Game
         _BackButton = Content.Load<Texture2D>("backbutton");
         _Terrain = Content.Load<Texture2D>("Terrain_and_Props"); //Credit: The Flavare
         _FloatingSkull = Content.Load<Texture2D>("floatingskull"); //Credit: unTied Games
+        _LightningTrap = Content.Load<Texture2D>("Lightning_Trap");//Credit: Foozle
         font = Content.Load<SpriteFont>("gamefont");
 
     }
@@ -136,16 +140,28 @@ public class Game1 : Game
                 Console.WriteLine("YOU DEAD");
                 Die();
             }
+            if (CheckCollision.Check(samurai, terrain.exit))
+            {
+                Console.WriteLine("YOU FINISHED THIS LEVEL");
+                Win();
+            }
         }
         else if (_GameState == GameState.Playing2)
         {
             terrain = terrain2;
             //Update characters
             samurai.Update(gameTime, terrain);
-        }
-        else if (_GameState == GameState.Dead)
-        {
-
+            lightningtrap.Update(gameTime, terrain);
+            if (CheckCollision.Check(samurai, lightningtrap)) //Check for death
+            {
+                Console.WriteLine("YOU DEAD");
+                Die();
+            }
+            if (CheckCollision.Check(samurai, terrain.exit)) //Check for Win
+            {
+                Console.WriteLine("YOU FINISHED THIS LEVEL");
+                Win();
+            }
         }
         else if (_GameState == GameState.Quiting)
         {
@@ -187,6 +203,7 @@ public class Game1 : Game
             //_spriteBatch.Draw(_FloorTexture, _FloorRect, Color.Aqua); //Floor for debugging
             samurai.Draw(_spriteBatch); //Samurai
             terrain.DrawTerrain(_spriteBatch); //Terrain
+            lightningtrap.Draw(_spriteBatch);
             _spriteBatch.End();
         }
         else if (_GameState == GameState.Dead)
@@ -196,6 +213,14 @@ public class Game1 : Game
             _spriteBatch.DrawString(font, "You died, press ESC to go back to the menu.", new Vector2(100,100), Color.Black);
             _spriteBatch.End();
         }
+        else if (_GameState == GameState.Won)
+        {
+            _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
+            _spriteBatch.Draw(_LevelBackgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White); //Background
+            _spriteBatch.DrawString(font, "You finished this level!", new Vector2(350, 100), Color.Black);
+            _spriteBatch.DrawString(font, "Press ESC to go back to the menu", new Vector2(230, 140), Color.Black);
+            _spriteBatch.End();
+        }
 
         base.Draw(gameTime);
     }
@@ -203,5 +228,10 @@ public class Game1 : Game
     public void Die()
     {
         _GameState = GameState.Dead;
+    }
+
+    public void Win()
+    {
+        _GameState = GameState.Won;
     }
 }

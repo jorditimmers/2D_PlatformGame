@@ -19,7 +19,6 @@
     <None Remove="Animations\" />
     <None Remove="Input\" />
     <None Remove="Enums\" />
-    <None Remove="Combat\" />
     <None Remove="Terrain\" />
     <None Remove="Terrain\Blocks\" />
   </ItemGroup>
@@ -28,7 +27,6 @@
     <Folder Include="Animations\" />
     <Folder Include="Input\" />
     <Folder Include="Enums\" />
-    <Folder Include="Combat\" />
     <Folder Include="Terrain\" />
     <Folder Include="Terrain\Blocks\" />
   </ItemGroup>

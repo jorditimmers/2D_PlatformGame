@@ -13,6 +13,7 @@ namespace DPlatformGame.Terrain
         public bool Passable { get; set; }
         public Color Color { get; set; }
         public Texture2D Texture { get; set; }
+        public Rectangle SpriteFrame { get; set; }
 
         public Rectangle BoundingBox { get; set; }
 
