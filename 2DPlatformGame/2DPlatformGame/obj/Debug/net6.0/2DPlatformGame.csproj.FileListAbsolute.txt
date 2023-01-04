@@ -77,3 +77,6 @@
 /Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/floatingskull.xnb
 /Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/gamefont.xnb
 /Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/Lightning_Trap.xnb
+/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/Rat_Run.xnb
+/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/brokenheart.xnb
+/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/bin/Debug/net6.0/Content/trophy.xnb

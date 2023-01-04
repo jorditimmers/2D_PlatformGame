@@ -7,13 +7,15 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DPlatformGame.GameObjects
 {
-    public class FloatingSkull : IGameObject, ICollision
+    public class Rat : IGameObject, ICollision
     {
-        Texture2D skullTexture;
+        Texture2D RatTexture;
         Vector2 position;
         Animation anim;
         public SpriteEffects effect;
         bool goesRight = false;
+        int minX;
+        int maxX;
 
         public AnimationPool pool;
         public float scale = 2.0f;
@@ -22,7 +24,7 @@ namespace DPlatformGame.GameObjects
         {
             get
             {
-                return new Rectangle((int)position.X,(int)position.Y, skullTexture.Width / 4, skullTexture.Height / 4);
+                return new Rectangle((int)position.X + RatTexture.Width / 8, (int)position.Y + RatTexture.Height / 4 + RatTexture.Height / 8, RatTexture.Width / 8, RatTexture.Height / 8);
             }
             set
             {
@@ -30,21 +32,25 @@ namespace DPlatformGame.GameObjects
             }
         }
 
-        public FloatingSkull(Texture2D t)
+        public Rat(Texture2D t, Vector2 position, int minX, int maxX)
         {
-            this.skullTexture = t;
+            this.minX = minX;
+            this.maxX = maxX;
+            this.RatTexture = t;
             effect = SpriteEffects.None;
 
-            Rectangle hitBox = new Rectangle(0, 0, skullTexture.Width/4, skullTexture.Height/4);
-            position = new Vector2(1000, 720 - 64 - (skullTexture.Height/4 * scale) + 6);
+            Rectangle hitBox = new Rectangle(0, 0, RatTexture.Width / 4, RatTexture.Height / 2);
+            this.position = position;
 
             anim = new Animation(hitBox);
-            anim.GetFramesFromTextureProperties(skullTexture.Width, skullTexture.Height, 4, 4);
+            anim.GetFramesFromTextureProperties(RatTexture.Width, RatTexture.Height, 4, 2);
+            anim.frames.RemoveAt(7);
+            anim.frames.RemoveAt(6);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(this.skullTexture, this.position, anim.CurrentFrame.SourceRectangle, Color.White, 0, new Vector2(0, 0), scale, effect, 0);
+            spriteBatch.Draw(this.RatTexture, this.position, anim.CurrentFrame.SourceRectangle, Color.White, 0, new Vector2(0, 0), scale, effect, 0);
         }
 
         public void Update(GameTime gameTime, TerainBuilder terrain)
@@ -54,8 +60,8 @@ namespace DPlatformGame.GameObjects
             if (goesRight)
             {
                 effect = SpriteEffects.None;
-                position.X += 3;
-                if (position.X >= 1200)
+                position.X += (float)2;
+                if (position.X >= maxX)
                 {
                     goesRight = false;
                 }
@@ -63,8 +69,8 @@ namespace DPlatformGame.GameObjects
             else
             {
                 effect = SpriteEffects.FlipHorizontally;
-                position.X -= 3;
-                if (position.X <= 0)
+                position.X -= (float)2;
+                if (position.X <= minX)
                 {
                     goesRight = true;
                 }

@@ -26,6 +26,9 @@ public class Game1 : Game
     Texture2D _Terrain;
     Texture2D _FloatingSkull;
     Texture2D _LightningTrap;
+    Texture2D _Heart;
+    Texture2D _Rat;
+    Texture2D _Trophy;
     GameState _GameState;
 
     Texture2D _FloorTexture; //FOR DEBUG
@@ -39,6 +42,8 @@ public class Game1 : Game
     Samurai samurai;
     FloatingSkull floatingSkull;
     Lightningtrap lightningtrap;
+    Rat rat;
+    Rat rat2;
     Blueprint blueprint;
     Blueprint2 blueprint2;
     TerainBuilder terrain;
@@ -66,6 +71,9 @@ public class Game1 : Game
         backbutton = new Button("backbutton", _BackButton, (_graphics.PreferredBackBufferWidth / 2) - (_PlayButton.Width / 2), (_graphics.PreferredBackBufferHeight / 2) + (_PlayButton.Height / 2) + 40);
         floatingSkull = new FloatingSkull(_FloatingSkull);
         lightningtrap = new Lightningtrap(_LightningTrap);
+        rat = new Rat(_Rat, new Vector2(180, 226), 160, 340);
+        rat2 = new Rat(_Rat, new Vector2(700, 358), 680, 810);
+
 
         blueprint = new Blueprint();
         blueprint2 = new Blueprint2();
@@ -97,6 +105,9 @@ public class Game1 : Game
         _Terrain = Content.Load<Texture2D>("Terrain_and_Props"); //Credit: The Flavare
         _FloatingSkull = Content.Load<Texture2D>("floatingskull"); //Credit: unTied Games
         _LightningTrap = Content.Load<Texture2D>("Lightning_Trap");//Credit: Foozle
+        _Rat = Content.Load<Texture2D>("Rat_Run"); //Credit: Admurin
+        _Heart = Content.Load<Texture2D>("brokenheart"); //Credit: FreeIconsPNG
+        _Trophy = Content.Load<Texture2D>("trophy"); //Credit PixelArtMaker
         font = Content.Load<SpriteFont>("gamefont");
 
     }
@@ -152,7 +163,9 @@ public class Game1 : Game
             //Update characters
             samurai.Update(gameTime, terrain);
             lightningtrap.Update(gameTime, terrain);
-            if (CheckCollision.Check(samurai, lightningtrap)) //Check for death
+            rat.Update(gameTime, terrain);
+            rat2.Update(gameTime, terrain);
+            if (CheckCollision.Check(samurai, lightningtrap) || CheckCollision.Check(samurai, rat) || CheckCollision.Check(samurai, rat2)) //Check for death
             {
                 Console.WriteLine("YOU DEAD");
                 Die();
@@ -203,7 +216,9 @@ public class Game1 : Game
             //_spriteBatch.Draw(_FloorTexture, _FloorRect, Color.Aqua); //Floor for debugging
             samurai.Draw(_spriteBatch); //Samurai
             terrain.DrawTerrain(_spriteBatch); //Terrain
-            lightningtrap.Draw(_spriteBatch);
+            rat.Draw(_spriteBatch); //Rat
+            rat2.Draw(_spriteBatch); //Rat2
+            lightningtrap.Draw(_spriteBatch); //Trap
             _spriteBatch.End();
         }
         else if (_GameState == GameState.Dead)
@@ -211,12 +226,14 @@ public class Game1 : Game
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
             _spriteBatch.Draw(_LevelBackgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White); //Background
             _spriteBatch.DrawString(font, "You died, press ESC to go back to the menu.", new Vector2(100,100), Color.Black);
+            _spriteBatch.Draw(_Heart, new Rectangle(1280 / 2 - _Heart.Width / 2, 720 / 2 - _Heart.Height / 2, _Heart.Width, _Heart.Height), Color.White);
             _spriteBatch.End();
         }
         else if (_GameState == GameState.Won)
         {
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
             _spriteBatch.Draw(_LevelBackgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White); //Background
+            _spriteBatch.Draw(_Trophy, new Rectangle(1280/2 - _Trophy.Width/2, 720/2 - _Trophy.Height/2, _Trophy.Width, _Trophy.Height), Color.White); //Heart
             _spriteBatch.DrawString(font, "You finished this level!", new Vector2(350, 100), Color.Black);
             _spriteBatch.DrawString(font, "Press ESC to go back to the menu", new Vector2(230, 140), Color.Black);
             _spriteBatch.End();

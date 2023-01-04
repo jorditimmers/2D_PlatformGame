@@ -13,7 +13,6 @@ namespace DPlatformGame.GameObjects
         Vector2 position;
         Animation anim;
         public SpriteEffects effect;
-        bool goesRight = false;
 
         public AnimationPool pool;
         public float scale = 2.0f;

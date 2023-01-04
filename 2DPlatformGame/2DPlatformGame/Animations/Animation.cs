@@ -9,7 +9,7 @@ namespace DPlatformGame.Animations
     {
         public AnimationFrame CurrentFrame { get; set; }
         public Rectangle hitBox;
-        private List<AnimationFrame> frames;
+        public List<AnimationFrame> frames;
         private int counter;
         private double secondCounter;
         private int fps = 15;
