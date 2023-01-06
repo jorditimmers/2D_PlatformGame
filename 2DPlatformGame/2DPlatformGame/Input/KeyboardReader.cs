@@ -20,7 +20,7 @@ namespace DPlatformGame.Input
             {
                 direction.X += 1;
             }
-            if (state.IsKeyDown(Keys.Space))
+            if (state.IsKeyDown(Keys.Space) || state.IsKeyDown(Keys.W))
             {
                 direction.Y = -12345;
             }

@@ -28,9 +28,12 @@ namespace DPlatformGame.Animations
         private readonly float gravity = 0.5f;
         private readonly float horizontalMovementSpeed = 5;
         private readonly float jumpingForce = 15;
+        int damageCounter;
 
         private bool isAttacking = false;
         private bool isInAir = false;
+        public bool DamageTaken;
+        private bool invisable;
         private bool isTouchingGround
         {
             get
@@ -58,6 +61,8 @@ namespace DPlatformGame.Animations
 
         public AnimationPool()
         {
+            DamageTaken = false;
+            invisable = false;
             effect = SpriteEffects.None;
             position = new Vector2(0, 0);
             velocity = new Vector2(5, 9.81f);
@@ -75,7 +80,7 @@ namespace DPlatformGame.Animations
         {
             KeyboardReader k = new KeyboardReader();
             var direction = k.ReadInput();
-            if(isInAir && direction.Y == -12345) //for not double jumping through platform | Basicly saying, if already in air don't activte jump ever
+            if (isInAir && direction.Y == -12345) //for not double jumping through platform | Basicly saying, if already in air don't activte jump ever
             {
                 direction.Y = 0;
             }
@@ -106,8 +111,22 @@ namespace DPlatformGame.Animations
                 velocity.Y += gravity;
             }
 
+            if (DamageTaken)
+            {
+                damageCounter++;
+
+                CheckInvisable();
+
+                if (damageCounter >= 200)
+                {
+                    damageCounter = 0;
+                    invisable = false;
+                    DamageTaken = false;
+                }
+            }
+
             //calculate next position
-            Rectangle nextPos = new Rectangle((int)(position.X + (direction.X * horizontalMovementSpeed) + (currentHitBox.X*scale)), (int)(position.Y + velocity.Y + (currentHitBox.Y * scale)), (int)(currentHitBox.Width*scale), (int)(currentHitBox.Height*scale));
+            Rectangle nextPos = new Rectangle((int)(position.X + (direction.X * horizontalMovementSpeed) + (currentHitBox.X * scale)), (int)(position.Y + velocity.Y + (currentHitBox.Y * scale)), (int)(currentHitBox.Width * scale), (int)(currentHitBox.Height * scale));
 
             if (CheckForCollisionsWithTerrain(nextPos, terrain)) //if collision with terrain, don't move vertically, unless you jump when already on the terrain
             {
@@ -141,11 +160,16 @@ namespace DPlatformGame.Animations
 
             CheckForFlip(direction);
             AnimationDecider(gameTime, direction);
+
         }
+
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(this.currentTexture, this.position, this.currentFrame, Color.White, 0, new Vector2(0, 0), scale, effect, 0);
+            if (!invisable)
+            {
+                spriteBatch.Draw(this.currentTexture, this.position, this.currentFrame, Color.White, 0, new Vector2(0, 0), scale, effect, 0);
+            }
         }
 
         #region Functions
@@ -166,6 +190,28 @@ namespace DPlatformGame.Animations
             {
                 effect = SpriteEffects.FlipHorizontally;
             }
+        }
+
+        public void CheckInvisable()
+        {
+            if (damageCounter > 20)
+                invisable = true;
+            if (damageCounter > 40)
+                invisable = false;
+            if (damageCounter > 60)
+                invisable = true;
+            if (damageCounter > 80)
+                invisable = false;
+            if (damageCounter > 100)
+                invisable = true;
+            if (damageCounter > 120)
+                invisable = false;
+            if (damageCounter > 140)
+                invisable = true;
+            if (damageCounter > 160)
+                invisable = false;
+            if (damageCounter > 180)
+                invisable = true;
         }
 
         public void AnimationDecider(GameTime gameTime, Vector2 direction)

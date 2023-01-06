@@ -3,6 +3,7 @@ using DPlatformGame.Characters;
 using DPlatformGame.Combat;
 using DPlatformGame.Enums;
 using DPlatformGame.GameObjects;
+using DPlatformGame.Health;
 using DPlatformGame.Terrain;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -27,6 +28,7 @@ public class Game1 : Game
     Texture2D _FloatingSkull;
     Texture2D _LightningTrap;
     Texture2D _Heart;
+    Texture2D _HealthHearth;
     Texture2D _Rat;
     Texture2D _Trophy;
     GameState _GameState;
@@ -38,6 +40,8 @@ public class Game1 : Game
     Button playbutton;
     Button play2button;
     Button backbutton;
+
+    Healthbar healtbar;
 
     Samurai samurai;
     FloatingSkull floatingSkull;
@@ -107,6 +111,7 @@ public class Game1 : Game
         _LightningTrap = Content.Load<Texture2D>("Lightning_Trap");//Credit: Foozle
         _Rat = Content.Load<Texture2D>("Rat_Run"); //Credit: Admurin
         _Heart = Content.Load<Texture2D>("brokenheart"); //Credit: FreeIconsPNG
+        _HealthHearth = Content.Load<Texture2D>("hearth"); //Credit PixelArtMaker
         _Trophy = Content.Load<Texture2D>("trophy"); //Credit PixelArtMaker
         font = Content.Load<SpriteFont>("gamefont");
 
@@ -125,6 +130,7 @@ public class Game1 : Game
             if (_GameState == GameState.Playing)//checking if terrain needs to be changed
             {
                 terrain = terrain1;
+                healtbar = new Healthbar(_HealthHearth); //give 3 lives
             }
             else if (_GameState == GameState.Menu)
             {
@@ -133,6 +139,7 @@ public class Game1 : Game
                 if(_GameState == GameState.Playing2)//checking if terrain needs to be changed
                 {
                     terrain = terrain2;
+                    healtbar = new Healthbar(_HealthHearth); //give 3 lives
                 }
             }
             if (_GameState == GameState.Menu)
@@ -146,10 +153,17 @@ public class Game1 : Game
             //Update characters
             samurai.Update(gameTime, terrain);
             floatingSkull.Update(gameTime, terrain);
-            if(CheckCollision.Check(samurai, floatingSkull))
+            lightningtrap.Update(gameTime, terrain);
+            if ((CheckCollision.Check(samurai, floatingSkull) || CheckCollision.Check(samurai, lightningtrap)) && samurai.pool.DamageTaken == false)
             {
-                Console.WriteLine("YOU DEAD");
-                Die();
+                Console.WriteLine("YOU DEAD"); //DEBUG
+                samurai.pool.DamageTaken = true;
+                healtbar.takeHealthPoint();
+                if (healtbar.points <= 0)
+                {
+                    samurai.pool.DamageTaken = false;
+                    Die();
+                }
             }
             if (CheckCollision.Check(samurai, terrain.exit))
             {
@@ -165,10 +179,16 @@ public class Game1 : Game
             lightningtrap.Update(gameTime, terrain);
             rat.Update(gameTime, terrain);
             rat2.Update(gameTime, terrain);
-            if (CheckCollision.Check(samurai, lightningtrap) || CheckCollision.Check(samurai, rat) || CheckCollision.Check(samurai, rat2)) //Check for death
+            if ((CheckCollision.Check(samurai, lightningtrap) || CheckCollision.Check(samurai, rat) || CheckCollision.Check(samurai, rat2)) && samurai.pool.DamageTaken == false) //Check for death
             {
                 Console.WriteLine("YOU DEAD");
-                Die();
+                samurai.pool.DamageTaken = true;
+                healtbar.takeHealthPoint();
+                if (healtbar.points <= 0)
+                {
+                    samurai.pool.DamageTaken = false;
+                    Die();
+                }
             }
             if (CheckCollision.Check(samurai, terrain.exit)) //Check for Win
             {
@@ -192,9 +212,13 @@ public class Game1 : Game
         {
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null);
             _spriteBatch.Draw(_LevelBackgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White); //Background
+            _spriteBatch.DrawString(font, "Ninja fighter", new Vector2(460, 70), Color.Black);
             playbutton.Draw(_spriteBatch);
             play2button.Draw(_spriteBatch);
             backbutton.Draw(_spriteBatch);
+            _spriteBatch.DrawString(font, "Level 1", new Vector2(550, 305), Color.Black);
+            _spriteBatch.DrawString(font, "Level 2", new Vector2(550, 380), Color.Black);
+            _spriteBatch.DrawString(font, "Quit", new Vector2(580, 454), Color.Black);
             _spriteBatch.End();
         }
         else if (_GameState == GameState.Playing)
@@ -206,6 +230,8 @@ public class Game1 : Game
             samurai.Draw(_spriteBatch); //Samurai
             floatingSkull.Draw(_spriteBatch); //floatingSkull
             terrain.DrawTerrain(_spriteBatch); //Terrain
+            lightningtrap.Draw(_spriteBatch); //Trap
+            healtbar.Draw(_spriteBatch);
             _spriteBatch.End();
         }
         else if (_GameState == GameState.Playing2)
@@ -219,6 +245,7 @@ public class Game1 : Game
             rat.Draw(_spriteBatch); //Rat
             rat2.Draw(_spriteBatch); //Rat2
             lightningtrap.Draw(_spriteBatch); //Trap
+            healtbar.Draw(_spriteBatch);
             _spriteBatch.End();
         }
         else if (_GameState == GameState.Dead)
