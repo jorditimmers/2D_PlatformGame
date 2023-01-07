@@ -17,7 +17,7 @@ namespace DPlatformGame.GameObjects
         {
             get
             {
-                return new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height);
+                return new Rectangle((int)position.X, (int)position.Y, Texture.Width/20, Texture.Height/20);
             }
             set
             {

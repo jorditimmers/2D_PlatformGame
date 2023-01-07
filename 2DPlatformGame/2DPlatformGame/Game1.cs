@@ -132,6 +132,7 @@ public class Game1 : Game
             _GameState = playbutton.GetGameState();
             if (_GameState == GameState.Playing)//checking if terrain needs to be changed
             {
+                samurai.pool.jumpingForce = 12;
                 jumpBoost = new JumpBoost(_JumpBoost, new Vector2(300, 620));
                 terrain = terrain1;
                 healtbar = new Healthbar(_HealthHearth); //give 3 lives
@@ -142,6 +143,7 @@ public class Game1 : Game
                 _GameState = play2button.GetGameState();
                 if(_GameState == GameState.Playing2)//checking if terrain needs to be changed
                 {
+                    samurai.pool.jumpingForce = 12;
                     jumpBoost = new JumpBoost(_JumpBoost, new Vector2(960, 620));
                     terrain = terrain2;
                     healtbar = new Healthbar(_HealthHearth); //give 3 lives
