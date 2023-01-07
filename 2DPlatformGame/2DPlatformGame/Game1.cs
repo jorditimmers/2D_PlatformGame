@@ -31,6 +31,7 @@ public class Game1 : Game
     Texture2D _HealthHearth;
     Texture2D _Rat;
     Texture2D _Trophy;
+    Texture2D _JumpBoost;
     GameState _GameState;
 
     Texture2D _FloorTexture; //FOR DEBUG
@@ -46,6 +47,7 @@ public class Game1 : Game
     Samurai samurai;
     FloatingSkull floatingSkull;
     Lightningtrap lightningtrap;
+    JumpBoost jumpBoost;
     Rat rat;
     Rat rat2;
     Blueprint blueprint;
@@ -113,6 +115,7 @@ public class Game1 : Game
         _Heart = Content.Load<Texture2D>("brokenheart"); //Credit: FreeIconsPNG
         _HealthHearth = Content.Load<Texture2D>("hearth"); //Credit PixelArtMaker
         _Trophy = Content.Load<Texture2D>("trophy"); //Credit PixelArtMaker
+        _JumpBoost = Content.Load<Texture2D>("JumpBoost"); //Credit PixelArtMaker
         font = Content.Load<SpriteFont>("gamefont");
 
     }
@@ -129,6 +132,7 @@ public class Game1 : Game
             _GameState = playbutton.GetGameState();
             if (_GameState == GameState.Playing)//checking if terrain needs to be changed
             {
+                jumpBoost = new JumpBoost(_JumpBoost, new Vector2(300, 620));
                 terrain = terrain1;
                 healtbar = new Healthbar(_HealthHearth); //give 3 lives
             }
@@ -138,6 +142,7 @@ public class Game1 : Game
                 _GameState = play2button.GetGameState();
                 if(_GameState == GameState.Playing2)//checking if terrain needs to be changed
                 {
+                    jumpBoost = new JumpBoost(_JumpBoost, new Vector2(960, 620));
                     terrain = terrain2;
                     healtbar = new Healthbar(_HealthHearth); //give 3 lives
                 }
@@ -165,6 +170,11 @@ public class Game1 : Game
                     Die();
                 }
             }
+            if (CheckCollision.Check(samurai, jumpBoost))
+            {
+                jumpBoost.Update(gameTime, terrain);
+                samurai.pool.jumpingForce = 15;
+            }
             if (CheckCollision.Check(samurai, terrain.exit))
             {
                 Console.WriteLine("YOU FINISHED THIS LEVEL");
@@ -189,6 +199,11 @@ public class Game1 : Game
                     samurai.pool.DamageTaken = false;
                     Die();
                 }
+            }
+            if(CheckCollision.Check(samurai, jumpBoost))
+            {
+                jumpBoost.Update(gameTime, terrain);
+                samurai.pool.jumpingForce = 15;
             }
             if (CheckCollision.Check(samurai, terrain.exit)) //Check for Win
             {
@@ -230,6 +245,7 @@ public class Game1 : Game
             samurai.Draw(_spriteBatch); //Samurai
             floatingSkull.Draw(_spriteBatch); //floatingSkull
             terrain.DrawTerrain(_spriteBatch); //Terrain
+            jumpBoost.Draw(_spriteBatch); //jumpBoost
             lightningtrap.Draw(_spriteBatch); //Trap
             healtbar.Draw(_spriteBatch);
             _spriteBatch.End();
@@ -244,6 +260,7 @@ public class Game1 : Game
             terrain.DrawTerrain(_spriteBatch); //Terrain
             rat.Draw(_spriteBatch); //Rat
             rat2.Draw(_spriteBatch); //Rat2
+            jumpBoost.Draw(_spriteBatch); //jumpBoost
             lightningtrap.Draw(_spriteBatch); //Trap
             healtbar.Draw(_spriteBatch);
             _spriteBatch.End();

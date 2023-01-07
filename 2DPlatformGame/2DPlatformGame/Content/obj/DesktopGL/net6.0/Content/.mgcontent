@@ -10,6 +10,7 @@
     <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/floatingskull.png</File>
     <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/gamefont.spritefont</File>
     <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/hearth.png</File>
+    <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/JumpBoost.png</File>
     <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/Lightning_Trap.png</File>
     <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/playbutton.png</File>
     <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/Rat_Run.png</File>
@@ -26,6 +27,7 @@
     <File>/Users/jorditimmers/Documents/School/2ITSOF - Semester 1/Game Development/2D_PlatformGame/2DPlatformGame/2DPlatformGame/Content/trophy.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

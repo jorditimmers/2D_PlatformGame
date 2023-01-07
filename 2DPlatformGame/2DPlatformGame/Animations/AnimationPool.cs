@@ -27,7 +27,7 @@ namespace DPlatformGame.Animations
 
         private readonly float gravity = 0.5f;
         private readonly float horizontalMovementSpeed = 5;
-        private readonly float jumpingForce = 15;
+        public float jumpingForce = 12;
         int damageCounter;
 
         private bool isAttacking = false;
